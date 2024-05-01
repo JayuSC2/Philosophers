@@ -6,9 +6,19 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/05/01 17:08:18 by juitz            ###   ########.fr       */
+/*   Updated: 2024/05/01 18:44:29 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void create_philo(t_philo *philo)
+{
+	int i;
+
+	i = 0;
+	while (i < philo->philo_count)
+	{
+		pthread_create()
+	}
+}
