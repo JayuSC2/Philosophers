@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/05/01 17:13:28 by juitz            ###   ########.fr       */
+/*   Updated: 2024/05/08 16:21:33 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ typedef struct	s_philo
 	int think_count;
 }			t_philo;
 
+void		create_IDs(t_philo *philo);
 void		ft_error(char *str);
 long int	ft_atol(const char *str);
 int			check_overflow(int argc, char **argv);
 int			isnumber(char *str);
+void		philo_eating(t_philo *philo);
+void		philo_sleeping(t_philo *philo);
+void		philo_thinking(t_philo *philo);
