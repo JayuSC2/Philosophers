@@ -4,10 +4,11 @@ CC = CC
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRCS =	src/main.c\
-		src/philo.c\
-		src/utils.c\
-		src/routines.c\
+SRCS =	src/main.c \
+		src/philo.c \
+		src/utils.c \
+		src/routines.c \
+		src/checks.c
 
 OBJS = $(SRCS:.c=.o)
 

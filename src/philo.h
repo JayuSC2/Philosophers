@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/05/08 16:21:33 by juitz            ###   ########.fr       */
+/*   Updated: 2024/05/08 16:42:49 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void		ft_error(char *str);
 long int	ft_atol(const char *str);
 int			check_overflow(int argc, char **argv);
 int			isnumber(char *str);
-void		philo_eating(t_philo *philo);
-void		philo_sleeping(t_philo *philo);
-void		philo_thinking(t_philo *philo);
+void		*philo_eating(void *eating);
+void		*philo_sleeping(void *sleeping);
+void		*philo_thinking(void *thinking);
