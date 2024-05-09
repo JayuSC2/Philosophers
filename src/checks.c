@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:17:06 by juitz             #+#    #+#             */
-/*   Updated: 2024/05/02 11:38:13 by juitz            ###   ########.fr       */
+/*   Updated: 2024/05/08 17:46:58 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ int	isnumber(char *str)
 int ft_check_args(int argc, char **argv)
 {
 	int i;
-
-	i = 0;
 	
+	i = 0;
 }
 
