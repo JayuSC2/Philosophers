@@ -1,14 +1,13 @@
 NAME = philo
 
-CC = CC
+COMPILER = cc
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -pthread -g
 
-SRCS =	src/main.c \
-		src/philo.c \
-		src/utils.c \
-		src/routines.c \
-		src/checks.c
+SRCS =	src/main.c\
+		src/philo.c\
+		src/utils.c\
+		src/routines.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -16,12 +15,10 @@ RM = rm -rf
 
 all: $(NAME)
 $(NAME): $(OBJS)
-	@$(MAKE) -s -C ./libft
-	@$(CC) $(CFLAGS) $(OBJS) ./libft/libft.a -o $(NAME)
+	@$(COMPILER) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "Program ready!"
 
 clean: 
-	@$(MAKE) -s -C ./libft fclean
 	@$(RM) $(OBJS)
 	@echo "Program cleaned successfully!"
 

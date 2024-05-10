@@ -6,9 +6,11 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:17:06 by juitz             #+#    #+#             */
-/*   Updated: 2024/05/08 17:46:58 by juitz            ###   ########.fr       */
+/*   Updated: 2024/05/10 14:17:58 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philo.h"
 
 long int	ft_atol(const char *str)
 {
@@ -80,7 +82,16 @@ int	isnumber(char *str)
 int ft_check_args(int argc, char **argv)
 {
 	int i;
+	int j;
 	
 	i = 0;
+	if (argv[i] == NULL || check_overflow(argc, argv) == 1)
+		return (1);
+	if (isnumber(argv[i]) == 0)
+		return (1);
+	while (argv[i])
+	{
+		while(argv[j])
+	}
 }
 
