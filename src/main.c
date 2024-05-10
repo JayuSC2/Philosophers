@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/05/10 17:09:23 by juitz            ###   ########.fr       */
+/*   Updated: 2024/05/10 18:21:33 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ int	main(int argc, char **argv)
 {
 	t_philo	philo;
 	
-	ft_putendl_fd("test1", 1);
 	ft_bzero(&philo, sizeof(t_philo));
-	ft_putendl_fd("test2", 1);
-	if (argc != 4 && argc != 5)
+	if (argc != 5 && argc != 6)
 		return (ft_putendl_fd("Error: Incorrect amount of arguments", 2), 1);
 	philo.philo_count = ft_atoi(argv[1]);
 	philo.forks = philo.philo_count;
