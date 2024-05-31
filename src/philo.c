@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/05/10 18:32:51 by juitz            ###   ########.fr       */
+/*   Updated: 2024/05/31 14:30:42 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,16 @@
 
 void	create_philo(t_philo *philo)
 {
-	pthread_t	philo1;
-	(void) philo;
-
-	pthread_create(&philo1, NULL, &philo_eating, NULL);
-	pthread_join(philo1, NULL);
+	pthread_t philos[philo->philo_count];
+	int i;
+	
+	i = 0;
+	while (i < philo->philo_count)
+	{
+		pthread_create(&philos[i], NULL, &philo_eating, NULL);
+		pthread_join(philo1, NULL);
+		i++;
+	}
 }
 // 	pthread_t	philo2;
 // 	pthread_t	philo3;
