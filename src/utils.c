@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:19:47 by juitz             #+#    #+#             */
-/*   Updated: 2024/05/10 16:59:50 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:43:14 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ size_t	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-void	ft_putchar_fd(char c, int fd)
+/* void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
@@ -65,7 +65,7 @@ void	ft_putendl_fd(char *s, int fd)
 void	ft_error(char *str)
 {
 	ft_putendl_fd(str, 2);
-}
+} */
 void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*ptr;
