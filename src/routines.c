@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/15 16:47:40 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/17 17:07:22 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void *philo_thinking(void *thinking)
 	usleep(philo->time_to_die);
 	return (NULL);
 }
-void *routine(void *routine)
+/* void *routine(void *routine)
 {
 	t_philo *philo;
 
@@ -75,4 +75,4 @@ void *routine(void *routine)
 		//think;
 		//usleep ????
 	}
-}
+} */
