@@ -1,42 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checks.c                                           :+:      :+:    :+:   */
+/*   error_checks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:17:06 by juitz             #+#    #+#             */
-/*   Updated: 2024/05/10 14:17:58 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/24 18:19:56 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-long int	ft_atol(const char *str)
-{
-	int			i;
-	long int	num;
-	int			sign;
-
-	i = 0;
-	num = 0;
-	sign = 1;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while ((str[i] >= '0' && str[i] <= '9'))
-	{
-		num *= 10;
-		num += str[i] - '0';
-		i++;
-	}
-	return (num * sign);
-}
 
 int	check_overflow(int argc, char **argv)
 {
@@ -79,19 +53,23 @@ int	isnumber(char *str)
 	return (1);
 }
 
-int ft_check_args(int argc, char **argv)
+int	ft_check_args(int argc, char **argv)
 {
 	int i;
-	int j;
 	
 	i = 0;
+	if (argc != 5 && argc != 6)
+		return (printf("Error: Invalid number of arguments\n"), 1);
+	// while(argv[i])
+	// {
+	// 	if (argv[i][j] == '\0')
+	// 		return (printf("Error: empty argument"));
+	// 	i++;
+	// }
 	if (argv[i] == NULL || check_overflow(argc, argv) == 1)
 		return (1);
 	if (isnumber(argv[i]) == 0)
 		return (1);
-	while (argv[i])
-	{
-		while(argv[j])
-	}
+	return (0);
 }
 

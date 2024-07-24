@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/15 14:26:06 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/24 18:09:28 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct	s_philo
 	int sleep_count;
 	int	time_to_sleep;
 	int think_count;
+	int	meals;
+	int last_meal;
 	int forks;
 	int avail_forks;
 	pthread_mutex_t lock;
@@ -48,3 +50,9 @@ int			ft_atoi(const char *str);
 void		*philo_eating(void *eating);
 void		*philo_sleeping(void *sleeping);
 void		*philo_thinking(void *thinking);
+
+//error_checks
+int	ft_check_args(int argc, char **argv);
+
+//monitoring
+long long	gettime(void);

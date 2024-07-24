@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/20 12:36:07 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/24 18:22:54 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 int	main(int argc, char **argv)
 {
 	t_philo	philo;
-	
+	int	i;
+	int j;
+
+	i = 1;
+	j = 0;
 	ft_bzero(&philo, sizeof(t_philo));
-	if (argc != 5 && argc != 6)
-		return (printf("Error: Incorrect amount of arguments"), 1);
+	if (ft_check_args(argc, argv) == 1)
+		return (printf("Error: Invalid arguments\n"), 1);
 	philo.philo_count = ft_atoi(argv[1]);
 	if (philo.philo_count == 1)
 	{

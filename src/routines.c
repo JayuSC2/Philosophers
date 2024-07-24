@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/17 17:07:22 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/24 17:52:04 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void *philo_eating(void *eating)
 	if (philo->avail_forks < 2)
 		printf("Error: not enough forks\n");
 	printf("Philo %d is eating\n", philo->id);
-	usleep(philo->time_to_eat);
+	usleep(philo->time_to_eat * 1000);
 	philo->avail_forks += 2;
 	if (pthread_mutex_unlock(&philo->lock) != 0)
 		printf("Error unlocking mutex\n");
@@ -44,7 +44,7 @@ void *philo_sleeping(void *sleeping)
 	ft_bzero(&philo, sizeof(t_philo));
 	philo->sleep_count++;
 	printf("Philo %d is sleeping\n", philo->id);
-	usleep(philo->time_to_sleep);
+	usleep(philo->time_to_sleep * 1000);
 	return (NULL);
 }
 void *philo_thinking(void *thinking)
@@ -55,24 +55,34 @@ void *philo_thinking(void *thinking)
 	(void) thinking;
 	philo->think_count++;
 	printf("Philo %d is thinking\n", philo->id);
-	usleep(philo->time_to_die);
+	usleep(philo->time_to_die * 1000);
 	return (NULL);
 }
-/* void *routine(void *routine)
+void *routine(void *routine)
 {
 	t_philo *philo;
 
+	ft_bzero(&philo, sizeof(t_philo));
 	(void) routine;
 	if (philo->philo_count > 2)
 	{
-		if (philo->id % 3 == 0)
-		//eat;
-		//usleep time_to_eat;
-		if (philo->id % 3 == 1)
+		if (philo->id % 2 == 0)
+		{
+			philo_eating(&philo);
+			philo_sleeping(&philo);
+			philo_thinking(&philo);
+		}
+		if (philo->id % 2 == 1)
+		{
+			philo_sleeping(&philo);
+			philo_thinking(&philo);
+			philo_eating(&philo);
+		}
 		//sleep;
 		//usleep time_to_sleep;
-		if (philo->id % 3 == 2)
+		// if (philo->id % 3 == 2)
 		//think;
 		//usleep ????
 	}
-} */
+	return (NULL);
+}
