@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/24 18:09:28 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/26 16:42:57 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int			ft_atoi(const char *str);
 void		*philo_eating(void *eating);
 void		*philo_sleeping(void *sleeping);
 void		*philo_thinking(void *thinking);
+void		*routine(void *routine);
 
 //error_checks
 int	ft_check_args(int argc, char **argv);
