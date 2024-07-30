@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/30 16:56:39 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/30 17:02:32 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_philo
 	int last_meal;
 	int forks;
 	int avail_forks;
+	long long	start;
 	long long	timer;
 	pthread_mutex_t lock;
 }			t_philo;

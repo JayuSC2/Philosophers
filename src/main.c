@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/30 16:58:49 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/30 17:04:01 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	main(int argc, char **argv)
 	philo.time_to_die = ft_atoi(argv[2]);
 	philo.time_to_eat = ft_atoi(argv[3]);
 	philo.time_to_sleep = ft_atoi(argv[4]);
+	printf("%lld", philo.start = gettime(tv));
 	sleep(5);
-	printf("%lld", philo.timer = gettimeofday(&tv, NULL));
+	printf("%lld", philo.timer = gettime(tv));
 	//create_philo(&philo);
 }
