@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:17:06 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/26 16:47:02 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/30 16:58:25 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	ft_check_args(int argc, char **argv)
 	// }
 	if (argv[i] == NULL || check_overflow(argc, argv) == 1)
 		return (1);
-	if (isnumber(argv[i]) == 0)
-		return (1);
+	/* if (isnumber(argv[i]) == 0)
+		return (1); */
 	return (0);
 }
 

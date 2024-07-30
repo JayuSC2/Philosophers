@@ -6,14 +6,16 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/24 18:22:54 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/30 16:58:49 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <bits/types/struct_timeval.h>
 
 int	main(int argc, char **argv)
 {
+	struct timeval tv;
 	t_philo	philo;
 	int	i;
 	int j;
@@ -34,5 +36,7 @@ int	main(int argc, char **argv)
 	philo.time_to_die = ft_atoi(argv[2]);
 	philo.time_to_eat = ft_atoi(argv[3]);
 	philo.time_to_sleep = ft_atoi(argv[4]);
-	create_philo(&philo);
+	sleep(5);
+	printf("%lld", philo.timer = gettimeofday(&tv, NULL));
+	//create_philo(&philo);
 }

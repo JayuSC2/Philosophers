@@ -6,15 +6,21 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/26 16:42:57 by juitz            ###   ########.fr       */
+/*   Updated: 2024/07/30 16:56:39 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <pthread.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/time.h>
+#ifndef PHILO_H
+# define PHILO_H
+# define _DEFAULT_SOURCE
+# include <stdlib.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <bits/types/struct_timeval.h>
+
+#endif
 
 typedef struct	s_philo
 {
@@ -32,11 +38,17 @@ typedef struct	s_philo
 	int last_meal;
 	int forks;
 	int avail_forks;
+	long long	timer;
 	pthread_mutex_t lock;
 }			t_philo;
 
+//philo
 void		create_philo(t_philo *philo);
 void		create_IDs(t_philo *philo);
+void		*philo_eating(void *eating);
+void		*philo_sleeping(void *sleeping);
+void		*philo_thinking(void *thinking);
+void		*routine(void *routine);
 
 //utils
 void		ft_putendl_fd(char *s, int fd);
@@ -47,13 +59,8 @@ int			check_overflow(int argc, char **argv);
 int			isnumber(char *str);
 int			ft_atoi(const char *str);
 
-void		*philo_eating(void *eating);
-void		*philo_sleeping(void *sleeping);
-void		*philo_thinking(void *thinking);
-void		*routine(void *routine);
-
 //error_checks
 int	ft_check_args(int argc, char **argv);
 
 //monitoring
-long long	gettime(void);
+long long	gettime(struct timeval);
