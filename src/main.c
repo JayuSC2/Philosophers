@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/30 17:04:01 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/15 13:12:45 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 
 int	main(int argc, char **argv)
 {
-	struct timeval tv;
 	t_philo	philo;
-	int	i;
-	int j;
-
-	i = 1;
-	j = 0;
+	
 	ft_bzero(&philo, sizeof(t_philo));
+	mutex_init(&philo);
 	if (ft_check_args(argc, argv) == 1)
 		return (printf("Error: Invalid arguments\n"), 1);
 	philo.philo_count = ft_atoi(argv[1]);
@@ -31,13 +27,11 @@ int	main(int argc, char **argv)
 		usleep(philo.time_to_die * 1000);
 		return (printf("Philo 1 died"), 1);
 	}
-	philo.forks = philo.philo_count;
-	//create_IDs(&philo);
 	philo.time_to_die = ft_atoi(argv[2]);
 	philo.time_to_eat = ft_atoi(argv[3]);
 	philo.time_to_sleep = ft_atoi(argv[4]);
-	printf("%lld", philo.start = gettime(tv));
-	sleep(5);
-	printf("%lld", philo.timer = gettime(tv));
-	//create_philo(&philo);
+	if (create_philo(&philo) == 1)
+		return (printf("Error creating philo\n"), 1);
+	destroy_mutex(&philo);
+	return (0);
 }

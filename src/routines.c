@@ -3,38 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   routines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/24 17:52:04 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/15 13:06:51 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <pthread.h>
 
 void *philo_eating(void *eating)
 {
 	t_philo *philo;
-	(void) eating;
+	t_timer timer;
 	
 	ft_bzero(&philo, sizeof(t_philo));
-	/* if (philo->avail_forks < 2)
-		return (1); */
-	if (pthread_mutex_init(&philo->lock, NULL) != 0)
-		printf("Error initializing mutex");
-	if (pthread_mutex_lock(&philo->lock) != 0)
-		printf("Error creating mutex lock");
-	philo->eat_count++;
-	philo->avail_forks -= 2;
-	if (philo->avail_forks < 2)
-		printf("Error: not enough forks\n");
-	printf("Philo %d is eating\n", philo->id);
-	usleep(philo->time_to_eat * 1000);
-	philo->avail_forks += 2;
-	if (pthread_mutex_unlock(&philo->lock) != 0)
-		printf("Error unlocking mutex\n");
-	return (NULL);
+	(void) eating;
+    pthread_mutex_lock(&philo->fork[philo->id]);
+    pthread_mutex_lock(&philo->fork[(philo->id + 1) % philo->philo_count]);
+
+    philo->eat_count++;
+    philo->avail_forks -= 2;
+	timer.time_passed = get_actual_time(timer);
+    printf("%zu: Philo %d is eating\n", timer.time_passed, philo->id);
+    usleep(philo->time_to_eat * 1000);
+    philo->avail_forks += 2;
+
+    pthread_mutex_unlock(&philo->fork[(philo->id + 1) % philo->philo_count]);
+    pthread_mutex_unlock(&philo->fork[philo->id]);
+
+    return NULL;
 }
 void *philo_sleeping(void *sleeping)
 {
@@ -55,7 +53,7 @@ void *philo_thinking(void *thinking)
 	(void) thinking;
 	philo->think_count++;
 	printf("Philo %d is thinking\n", philo->id);
-	usleep(philo->time_to_die * 1000);
+	//usleep(philo->time_to_die * 1000);
 	return (NULL);
 }
 void *routine(void *routine)
@@ -78,11 +76,6 @@ void *routine(void *routine)
 			philo_thinking(&philo);
 			philo_eating(&philo);
 		}
-		//sleep;
-		//usleep time_to_sleep;
-		// if (philo->id % 3 == 2)
-		//think;
-		//usleep ????
 	}
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/30 17:02:32 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/15 13:12:39 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,21 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <sys/time.h>
-# include <bits/types/struct_timeval.h>
+# include <stdbool.h>
 
 #endif
+
+typedef struct	s_timer
+{
+	size_t	start_time;
+	size_t	current_time;
+	size_t	time_passed;
+}				t_timer;
 
 typedef struct	s_philo
 {
 	int philo_count;
 	int id;
-	// int left_fork;
-	// int right_fork;
 	int	time_to_die;
 	int eat_count;
 	int time_to_eat;
@@ -36,15 +41,15 @@ typedef struct	s_philo
 	int think_count;
 	int	meals;
 	int last_meal;
-	int forks;
+	//int forks;
 	int avail_forks;
-	long long	start;
-	long long	timer;
-	pthread_mutex_t lock;
+	bool death_flag;
+	pthread_mutex_t *fork;
+	t_timer	time;
 }			t_philo;
 
 //philo
-void		create_philo(t_philo *philo);
+int			create_philo(t_philo *philo);
 void		create_IDs(t_philo *philo);
 void		*philo_eating(void *eating);
 void		*philo_sleeping(void *sleeping);
@@ -64,4 +69,11 @@ int			ft_atoi(const char *str);
 int	ft_check_args(int argc, char **argv);
 
 //monitoring
-long long	gettime(struct timeval);
+
+//timer
+size_t	get_current_time(void);
+size_t	get_actual_time(t_timer time);
+
+//init
+int	mutex_init(t_philo *philo);
+int	destroy_mutex(t_philo *philo);

@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   create_philo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/07/26 16:42:41 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/15 13:16:14 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* void	create_IDs(t_philo *philo)
-{
-	int i;
-
-	i = 1;
-
-	philo->id = malloc(philo->philo_count * sizeof(int));
-	while (i <= philo->philo_count)
-	{
-		philo->id[i] = i;
-		i++;
-	}
-} */
-
-void	create_philo(t_philo *philo)
+int	create_philo(t_philo *philo)
 {
 	pthread_t philos[philo->philo_count];
 	int i;
@@ -39,29 +25,12 @@ void	create_philo(t_philo *philo)
 		philo->id = i;
 		i++;
 	}
-}
-// 	pthread_t	philo2;
-// 	pthread_t	philo3;
-	// int i;
-
-	// i = 0;
-	// while (i < philo->philo_count)
-	// {
-	// 	pthread_create(&philo1, NULL, &philo_eating, NULL);
-	// 	i++;
-	// 	pthread_create(&philo2, NULL, &philo_sleeping, NULL);
-	// 	i++;
-	// 	pthread_create(&philo3, NULL, &philo_thinking, NULL);
-	// 	i++;
-	// }
-
-/* void	create_philo(t_philo *philo)
-{
-	int i;
-
+	philo->time.start_time = get_current_time();
 	i = 0;
-	while (i < philo->philo_count)
-	{
-		
-	}
-} */
+    while (i < philo->philo_count)
+    {
+        pthread_join(philos[i], NULL);
+        i++;
+    }
+    return (0);
+}
