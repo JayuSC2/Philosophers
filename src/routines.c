@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/15 13:06:51 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/16 09:33:55 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,15 @@
 void *philo_eating(void *eating)
 {
 	t_philo *philo;
-	t_timer timer;
 	
-	ft_bzero(&philo, sizeof(t_philo));
 	(void) eating;
     pthread_mutex_lock(&philo->fork[philo->id]);
     pthread_mutex_lock(&philo->fork[(philo->id + 1) % philo->philo_count]);
 
     philo->eat_count++;
     philo->avail_forks -= 2;
-	timer.time_passed = get_actual_time(timer);
-    printf("%zu: Philo %d is eating\n", timer.time_passed, philo->id);
+	philo->time.time_passed = get_actual_time(philo->time);
+    printf("%zu: Philo %d is eating\n", philo->time.time_passed, philo->id);
     usleep(philo->time_to_eat * 1000);
     philo->avail_forks += 2;
 
@@ -39,7 +37,6 @@ void *philo_sleeping(void *sleeping)
 	t_philo *philo;
 	(void) sleeping;
 	
-	ft_bzero(&philo, sizeof(t_philo));
 	philo->sleep_count++;
 	printf("Philo %d is sleeping\n", philo->id);
 	usleep(philo->time_to_sleep * 1000);
@@ -49,7 +46,6 @@ void *philo_thinking(void *thinking)
 {
 	t_philo *philo;
 	
-	ft_bzero(&philo, sizeof(t_philo));
 	(void) thinking;
 	philo->think_count++;
 	printf("Philo %d is thinking\n", philo->id);
