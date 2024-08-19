@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/15 13:12:45 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/19 16:13:03 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,24 @@
 int	main(int argc, char **argv)
 {
 	t_philo	philo;
+	t_metadata	m_data;
 	
 	ft_bzero(&philo, sizeof(t_philo));
-	mutex_init(&philo);
+	mutex_init(&m_data);
 	if (ft_check_args(argc, argv) == 1)
 		return (printf("Error: Invalid arguments\n"), 1);
-	philo.philo_count = ft_atoi(argv[1]);
-	if (philo.philo_count == 1)
+	m_data.philo_count = ft_atoi(argv[1]);
+	if (m_data.philo_count == 1)
 	{
-		usleep(philo.time_to_die * 1000);
+		//create thread with 1 philo
+		usleep(m_data.time_to_die * 1000);
 		return (printf("Philo 1 died"), 1);
 	}
-	philo.time_to_die = ft_atoi(argv[2]);
-	philo.time_to_eat = ft_atoi(argv[3]);
-	philo.time_to_sleep = ft_atoi(argv[4]);
-	if (create_philo(&philo) == 1)
+	m_data.time_to_die = ft_atoi(argv[2]);
+	m_data.time_to_eat = ft_atoi(argv[3]);
+	m_data.time_to_sleep = ft_atoi(argv[4]);
+	if (create_philo(&m_data) == 1)
 		return (printf("Error creating philo\n"), 1);
-	destroy_mutex(&philo);
+	destroy_mutex(&m_data);
 	return (0);
 }

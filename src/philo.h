@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/16 16:11:06 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/19 14:41:39 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,34 @@ typedef struct	s_timer
 
 typedef struct	s_philo
 {
-	int philo_count;
 	int id;
-	int	time_to_die;
-	int eat_count;
-	int time_to_eat;
-	int sleep_count;
-	int	time_to_sleep;
-	int	meals;
+	//int	time_to_die;
+	//int eat_count;
+	//int time_to_eat;
+	//int sleep_count;
+	//int	time_to_sleep;
+	//int	meals;
 	int last_meal;
 	//int forks;
-	int avail_forks;
+	//int avail_forks;
 	bool death_flag;
 	pthread_mutex_t *fork;
 	t_timer	time;
 }			t_philo;
 
+typedef struct	s_metadata
+{
+	int	philo_count;
+	int	time_to_die;
+	int time_to_eat;
+	int	time_to_sleep;
+	int	num_of_meals;
+	t_timer	time;
+	t_philo	philo;
+}				t_metadata;
+
 //philo
-int			create_philo(t_philo *philo);
+int			create_philo(t_metadata *m_data);
 void		create_IDs(t_philo *philo);
 void		*philo_eating(void *eating);
 void		*philo_sleeping(void *sleeping);
@@ -74,5 +84,5 @@ size_t	get_current_time(void);
 size_t	get_actual_time(t_timer time);
 
 //init
-int	mutex_init(t_philo *philo);
-int	destroy_mutex(t_philo *philo);
+int	mutex_init(t_metadata *m_data);
+int	destroy_mutex(t_metadata *m_data);
