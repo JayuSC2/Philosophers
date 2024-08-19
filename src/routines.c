@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/19 17:17:12 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/19 17:46:18 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,23 @@ void *philo_thinking(void *arg)
 	//usleep(philo.time_to_die * 1000);
 	return (NULL);
 }
-void *routine(void *routine)
+void *routine(void *arg)
 {
-	t_metadata m_data;
-	t_philo philo;
+	t_metadata m_data = *(t_metadata *)arg;
 
-	(void) routine;
 	if (m_data.philo_count > 2 && m_data.philo_count % 2 == 0)
 	{
-		if (philo.id % 2 == 0)
+		if (m_data.philo.id % 2 == 0)
 		{
-			philo_eating(&philo);
-			philo_sleeping(&philo);
-			philo_thinking(&philo);
+			philo_eating(&m_data);
+			philo_sleeping(&m_data);
+			philo_thinking(&m_data);
 		}
-		if (philo.id % 2 == 1)
+		if (m_data.philo.id % 2 == 1)
 		{
-			philo_sleeping(&philo);
-			philo_thinking(&philo);
-			philo_eating(&philo);
+			philo_sleeping(&m_data);
+			philo_thinking(&m_data);
+			philo_eating(&m_data);
 		}
 	}
 	return (NULL);
