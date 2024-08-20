@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/19 16:13:03 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/20 20:00:52 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 	t_philo	philo;
 	t_metadata	m_data;
 	
+	ft_bzero(&m_data, sizeof(t_metadata));
 	ft_bzero(&philo, sizeof(t_philo));
 	mutex_init(&m_data);
 	if (ft_check_args(argc, argv) == 1)

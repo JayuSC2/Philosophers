@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/19 14:41:39 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/20 20:47:02 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,31 @@
 # include <stdbool.h>
 
 #endif
+
+/* typedef struct	s_timer
+{
+    size_t	start_time;
+    size_t	current_time;
+    size_t	time_passed;
+}				t_timer;
+
+typedef struct	s_metadata
+{
+    int	philo_count;
+    int	time_to_die;
+    int time_to_eat;
+    int time_to_sleep;
+}				t_metadata;
+
+typedef struct	s_philo
+{
+    int id;
+    int last_meal;
+    bool death_flag;
+    pthread_mutex_t *fork;
+    t_timer	*time;
+    s_metadata *metadata;
+}			t_philo; */
 
 typedef struct	s_timer
 {
@@ -43,7 +68,7 @@ typedef struct	s_philo
 	//int avail_forks;
 	bool death_flag;
 	pthread_mutex_t *fork;
-	t_timer	time;
+	t_timer	*time;
 }			t_philo;
 
 typedef struct	s_metadata
@@ -53,8 +78,8 @@ typedef struct	s_metadata
 	int time_to_eat;
 	int	time_to_sleep;
 	int	num_of_meals;
-	t_timer	time;
-	t_philo	philo;
+	t_timer	*time;
+	t_philo	*philo;
 }				t_metadata;
 
 //philo

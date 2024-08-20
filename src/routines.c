@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/19 17:46:18 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/20 21:09:14 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ void *philo_eating(void *arg)
 {
 	t_metadata m_data = *(t_metadata *)arg;
 	
-    pthread_mutex_lock(&m_data.philo.fork[m_data.philo.id]);
-    pthread_mutex_lock(&m_data.philo.fork[(m_data.philo.id + 1) % m_data.philo_count]);
+    pthread_mutex_lock(&m_data.philo->fork[m_data.philo->id]);
+    pthread_mutex_lock(&m_data.philo->fork[(m_data.philo->id + 1) % m_data.philo_count]);
 
     //data.eat_count++;
-	m_data.time.time_passed = get_actual_time(m_data.philo.time);
-    printf("%zu: Philo %d is eating\n", m_data.philo.time.time_passed, m_data.philo.id);
+	m_data.time->time_passed = get_actual_time(*m_data.philo->time);
+	printf("%zu: Philo %d is eating\n", m_data.philo->time->time_passed, m_data.philo->id);
     usleep(m_data.time_to_eat * 1000);
-	m_data.time.time_passed = get_actual_time(m_data.philo.time);
-	printf("%zu: Philo %d has finished eating\n", m_data.philo.time.time_passed, m_data.philo.id);
-	m_data.philo.last_meal = get_actual_time(m_data.philo.time);
+	m_data.time->time_passed = get_actual_time(*m_data.philo->time);
+	printf("%zu: Philo %d has finished eating\n", m_data.philo->time->time_passed, m_data.philo->id);
+	m_data.philo->last_meal = get_actual_time(*m_data.philo->time);
 
-    pthread_mutex_unlock(&m_data.philo.fork[(m_data.philo.id + 1) % m_data.philo_count]);
-    pthread_mutex_unlock(&m_data.philo.fork[m_data.philo.id]);
+	pthread_mutex_unlock(&m_data.philo->fork[(m_data.philo->id + 1) % m_data.philo_count]);
+	pthread_mutex_unlock(&m_data.philo->fork[m_data.philo->id]);
 
     return (NULL);
 }
@@ -37,7 +37,7 @@ void *philo_sleeping(void *arg)
 	t_metadata m_data = *(t_metadata *)arg;
 	
 	//philo.sleep_count++;
-	printf("Philo %d is sleeping\n", m_data.philo.id);
+	printf("Philo %d is sleeping\n", m_data.philo->id);
 	usleep(m_data.time_to_sleep * 1000);
 	return (NULL);
 }
@@ -45,7 +45,7 @@ void *philo_thinking(void *arg)
 {
 	t_metadata m_data = *(t_metadata *)arg;
 	
-	printf("Philo %d is thinking\n", m_data.philo.id);
+	printf("Philo %d is thinking\n", m_data.philo->id);
 	//usleep(philo.time_to_die * 1000);
 	return (NULL);
 }
@@ -55,13 +55,13 @@ void *routine(void *arg)
 
 	if (m_data.philo_count > 2 && m_data.philo_count % 2 == 0)
 	{
-		if (m_data.philo.id % 2 == 0)
+		if (m_data.philo->id % 2 == 0)
 		{
 			philo_eating(&m_data);
 			philo_sleeping(&m_data);
 			philo_thinking(&m_data);
 		}
-		if (m_data.philo.id % 2 == 1)
+		if (m_data.philo->id % 2 == 1)
 		{
 			philo_sleeping(&m_data);
 			philo_thinking(&m_data);
@@ -70,3 +70,62 @@ void *routine(void *arg)
 	}
 	return (NULL);
 }
+
+/* void *philo_eating(void *arg)
+{
+    t_philo *philo = (t_philo *)arg;
+    
+    pthread_mutex_lock(&philo->fork[philo->id]);
+    pthread_mutex_lock(&philo->fork[(philo->id + 1) % philo->philo_count]);
+
+    philo->time->time_passed = get_actual_time(*philo->time);
+    printf("%zu: Philo %d is eating\n", philo->time->time_passed, philo->id);
+    usleep(philo->time_to_eat * 1000);
+    philo->time->time_passed = get_actual_time(*philo->time);
+    printf("%zu: Philo %d has finished eating\n", philo->time->time_passed, philo->id);
+    philo->last_meal = get_actual_time(*philo->time);
+
+    pthread_mutex_unlock(&philo->fork[(philo->id + 1) % philo->philo_count]);
+    pthread_mutex_unlock(&philo->fork[philo->id]);
+
+    return (NULL);
+}
+
+void *philo_sleeping(void *arg)
+{
+    t_philo *philo = (t_philo *)arg;
+    
+    printf("Philo %d is sleeping\n", philo->id);
+    usleep(philo->time_to_sleep * 1000);
+    return (NULL);
+}
+
+void *philo_thinking(void *arg)
+{
+    t_philo *philo = (t_philo *)arg;
+    
+    printf("Philo %d is thinking\n", philo->id);
+    return (NULL);
+}
+
+void *routine(void *arg)
+{
+    t_philo *philo = (t_philo *)arg;
+
+    if (philo->philo_count > 2 && philo->philo_count % 2 == 0)
+    {
+        if (philo->id % 2 == 0)
+        {
+            philo_eating(philo);
+            philo_sleeping(philo);
+            philo_thinking(philo);
+        }
+        if (philo->id % 2 == 1)
+        {
+            philo_sleeping(philo);
+            philo_thinking(philo);
+            philo_eating(philo);
+        }
+    }
+    return (NULL);
+} */
