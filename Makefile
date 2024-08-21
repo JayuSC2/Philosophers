@@ -10,7 +10,8 @@ SRCS =	src/main.c \
 		src/utils.c \
 		src/routines.c \
 		src/error_checks.c \
-		src/timecheck.c
+		src/timecheck.c \
+		src/monitoring.c
 
 OBJS = $(SRCS:.c=.o)
 

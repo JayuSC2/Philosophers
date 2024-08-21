@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/20 20:47:02 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/21 17:18:30 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 
 /* typedef struct	s_timer
 {
-    size_t	start_time;
-    size_t	current_time;
-    size_t	time_passed;
+    int	start_time;
+    int	current_time;
+    int	time_passed;
 }				t_timer;
 
 typedef struct	s_metadata
@@ -49,25 +49,28 @@ typedef struct	s_philo
 
 typedef struct	s_timer
 {
-	size_t	start_time;
-	size_t	current_time;
-	size_t	time_passed;
+	int	start_time;
+	int	current_time;
+	int	time_passed;
 }				t_timer;
 
 typedef struct	s_philo
 {
 	int id;
 	//int	time_to_die;
-	//int eat_count;
+	int eat_count;
 	//int time_to_eat;
 	//int sleep_count;
 	//int	time_to_sleep;
 	//int	meals;
+	pthread_mutex_t *fork;
+	pthread_mutex_t *left_fork;
+	pthread_mutex_t *right_fork;
 	int last_meal;
+	int	meal_counter;
 	//int forks;
 	//int avail_forks;
 	bool death_flag;
-	pthread_mutex_t *fork;
 	t_timer	*time;
 }			t_philo;
 
@@ -78,6 +81,8 @@ typedef struct	s_metadata
 	int time_to_eat;
 	int	time_to_sleep;
 	int	num_of_meals;
+	//pthread_mutex_t *forks;
+	pthread_mutex_t	print_lock;
 	t_timer	*time;
 	t_philo	*philo;
 }				t_metadata;
@@ -103,11 +108,13 @@ int			ft_atoi(const char *str);
 int	ft_check_args(int argc, char **argv);
 
 //monitoring
+int	monitoring(t_metadata *m_data);
 
 //timer
-size_t	get_current_time(void);
-size_t	get_actual_time(t_timer time);
+int	get_current_time(void);
+int	get_actual_time(t_timer *timer);
 
 //init
+int	init_variables(t_metadata *m_data, char **argv);
 int	mutex_init(t_metadata *m_data);
 int	destroy_mutex(t_metadata *m_data);

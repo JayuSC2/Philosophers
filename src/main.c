@@ -3,26 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/20 20:00:52 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/21 17:13:10 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <bits/types/struct_timeval.h>
 
 int	main(int argc, char **argv)
 {
-	t_philo	philo;
+	//t_philo	philo;
 	t_metadata	m_data;
 	
 	ft_bzero(&m_data, sizeof(t_metadata));
-	ft_bzero(&philo, sizeof(t_philo));
-	mutex_init(&m_data);
+	//ft_bzero(&philo, sizeof(t_philo));
+	init_variables(&m_data, argv);
+	printf("test2\n");
+	//mutex_init(&m_data);
 	if (ft_check_args(argc, argv) == 1)
 		return (printf("Error: Invalid arguments\n"), 1);
+	printf("test3\n");
 	m_data.philo_count = ft_atoi(argv[1]);
 	if (m_data.philo_count == 1)
 	{
@@ -35,6 +37,8 @@ int	main(int argc, char **argv)
 	m_data.time_to_sleep = ft_atoi(argv[4]);
 	if (create_philo(&m_data) == 1)
 		return (printf("Error creating philo\n"), 1);
-	destroy_mutex(&m_data);
+	printf("test4\n");
+	//destroy_mutex(&m_data);
+	printf("test6\n");
 	return (0);
 }
