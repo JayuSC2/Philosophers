@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_philo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/21 16:53:17 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/22 13:37:31 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ int	create_philo(t_metadata *m_data)
         if (pthread_create(&threads[i], NULL, &routine, &m_data->philo[i]) != 0)
             printf("Error creating thread\n");
         i++;
-		printf("test5\n");
     }
     m_data->time->start_time = get_current_time();
-	//monitoring(m_data);
+	monitoring(m_data);
     i = 0;
     while (i < m_data->philo_count)
     {
