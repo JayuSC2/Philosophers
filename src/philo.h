@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/22 13:26:43 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/23 12:06:29 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void		*philo_thinking(void *thinking);
 void		*routine(void *routine);
 
 //utils
+void		print_status(t_metadata	m_data, char *status);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_bzero(void *s, size_t n);
 void		ft_error(char *str);

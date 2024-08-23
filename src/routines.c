@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/21 17:19:13 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/23 12:18:20 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void *philo_eating(void *arg)
 	
     pthread_mutex_lock(&m_data.philo->fork[m_data.philo->id]);
     pthread_mutex_lock(&m_data.philo->fork[(m_data.philo->id + 1) % m_data.philo_count]);
-	m_data.time->time_passed = get_actual_time(m_data.philo->time);
-	printf("%d: Philo %d is eating\n", m_data.philo->time->time_passed, m_data.philo->id);
+	//m_data.time->time_passed = get_actual_time(m_data.philo->time);
+    print_status(m_data, "is eating\n");
     usleep(m_data.time_to_eat * 1000);
 	m_data.time->time_passed = get_actual_time(m_data.philo->time);
 	printf("%d: Philo %d has finished eating\n", m_data.philo->time->time_passed, m_data.philo->id);
