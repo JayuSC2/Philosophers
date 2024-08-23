@@ -6,33 +6,37 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/23 16:37:50 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/23 18:19:10 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	create_philo(t_metadata *m_data)
+int	create_philo(t_philo *philo)
 {
-    pthread_t threads[m_data->philo_count];
+    pthread_t threads[philo->m_data->philo_count];
     int i;
     
     i = 0;
-    while (i < m_data->philo_count)
+    while (i < philo->m_data->philo_count)
     {
-        m_data->philo[i].id = i + 1;
-        m_data->philo[i].time = m_data->time;
-        if (pthread_create(&threads[i], NULL, &routine, m_data) != 0)
+        philo[i].id = i + 1;
+        philo[i].time = philo->time;
+		philo[i].last_meal = get_current_time();
+		philo[i].eat_count = 0;
+        if (pthread_create(&threads[i], NULL, &routine, &philo[i]) != 0)
             return(1);
         i++;
     }
-    m_data->time->start_time = get_current_time();
-	monitoring(m_data);
+	printf("test2\n");
+	//philo->time->start_time = get_current_time();
+	monitoring(philo);
     i = 0;
-    while (i < m_data->philo_count)
+    while (i < philo->m_data->philo_count)
     {
         pthread_join(threads[i], NULL);
         i++;
     }
     return (0);
+	printf("test3\n");
 }
