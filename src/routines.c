@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/23 12:18:20 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/23 12:52:50 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void *philo_eating(void *arg)
     print_status(m_data, "is eating\n");
     usleep(m_data.time_to_eat * 1000);
 	m_data.time->time_passed = get_actual_time(m_data.philo->time);
-	printf("%d: Philo %d has finished eating\n", m_data.philo->time->time_passed, m_data.philo->id);
+	print_status(m_data, "finished eating\n");
 	m_data.philo->last_meal = get_actual_time(m_data.philo->time);
 	m_data.philo->meal_counter++;
 	pthread_mutex_unlock(&m_data.philo->fork[(m_data.philo->id + 1) % m_data.philo_count]);
@@ -34,7 +34,7 @@ void *philo_sleeping(void *arg)
 	t_metadata m_data = *(t_metadata *)arg;
 	
 	//philo.sleep_count++;
-	printf("Philo %d is sleeping\n", m_data.philo->id);
+	print_status(m_data, "is sleeping\n");
 	usleep(m_data.time_to_sleep * 1000);
 	return (NULL);
 }
@@ -42,7 +42,7 @@ void *philo_thinking(void *arg)
 {
 	t_metadata m_data = *(t_metadata *)arg;
 	
-	printf("Philo %d is thinking\n", m_data.philo->id);
+	print_status(m_data, "is thinking\n");
 	//usleep(philo.time_to_die * 1000);
 	return (NULL);
 }
