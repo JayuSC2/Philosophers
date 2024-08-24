@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 14:31:53 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/24 14:45:22 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,21 @@ int	create_philo(t_philo *philo)
     }
 	printf("test2\n");
 	//philo->time->start_time = get_current_time();
-	monitoring(philo);
+	//monitoring(philo);
 	printf("test3\n");
     i = 0;
+	printf("%d\n", philo->m_data->philo_count);
     while (i < philo->m_data->philo_count)
     {
-        pthread_join(threads[i], NULL);
+        printf("Joining thread %d\n", i);
+        if (pthread_join(threads[i], NULL) != 0)
+        {
+            printf("Error joining thread %d\n", i);
+            return 1;
+        }
+        printf("Thread %d joined successfully\n", i);
         i++;
     }
-    return (0);
-	printf("test4\n");
+    printf("All threads joined\n");
+	return (0);
 }
