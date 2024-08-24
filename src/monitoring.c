@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 14:39:39 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/24 16:40:31 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	monitoring(t_philo *philo)
 {
     int i;
-
+	
 	while (1)
 	{
 		i = 0;
@@ -34,7 +34,7 @@ int	monitoring(t_philo *philo)
 			}
 			i++;
 		}
-		//usleep(1000);
+		usleep(1000);
 	}
 	return (0);
 }

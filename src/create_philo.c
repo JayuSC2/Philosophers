@@ -6,11 +6,12 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 14:45:22 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/24 16:42:00 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <time.h>
 
 int	create_philo(t_philo *philo)
 {
@@ -22,7 +23,7 @@ int	create_philo(t_philo *philo)
     {
         philo[i].id = i + 1;
         philo[i].time = philo->time;
-		philo[i].last_meal = get_current_time();
+		philo[i].last_meal = get_actual_time(philo->time);
 		philo[i].eat_count = 0;
         if (pthread_create(&threads[i], NULL, &routine, &philo[i]) != 0)
             return(1);
@@ -30,10 +31,9 @@ int	create_philo(t_philo *philo)
     }
 	printf("test2\n");
 	//philo->time->start_time = get_current_time();
-	//monitoring(philo);
+	monitoring(philo);
 	printf("test3\n");
     i = 0;
-	printf("%d\n", philo->m_data->philo_count);
     while (i < philo->m_data->philo_count)
     {
         printf("Joining thread %d\n", i);

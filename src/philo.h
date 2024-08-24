@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/23 18:15:43 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/24 16:33:30 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct	s_philo
 	//int forks;
 	//int avail_forks;
 	bool death_flag;
+	bool is_full;
 	t_timer	*time;
 	t_metadata	*m_data;
 }			t_philo;

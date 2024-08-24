@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 14:29:31 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/24 16:50:52 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void *philo_eating_even(void *arg)
 	t_philo *philo = (t_philo *)arg;
 	
     pthread_mutex_lock(&philo->fork[philo->id]);
+	print_status(philo, "has taken a fork\n");
     pthread_mutex_lock(&philo->fork[(philo->id + 1) % philo->m_data->philo_count]);
+	print_status(philo, "has taken a fork\n");
 	//m_data.time->time_passed = get_actual_time(m_data.philo->time);
     print_status(philo, "is eating\n");
     usleep(philo->m_data->time_to_eat * 1000);
