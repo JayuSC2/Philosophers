@@ -6,13 +6,13 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/23 17:49:17 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/24 14:29:31 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void *philo_eating(void *arg)
+void *philo_eating_even(void *arg)
 {
 	t_philo *philo = (t_philo *)arg;
 	
@@ -27,6 +27,24 @@ void *philo_eating(void *arg)
 	philo->meal_counter++;
 	pthread_mutex_unlock(&philo->fork[(philo->id + 1) % philo->m_data->philo_count]);
 	pthread_mutex_unlock(&philo->fork[philo->id]);
+    return (NULL);
+}
+
+void *philo_eating_uneven(void *arg)
+{
+	t_philo *philo = (t_philo *)arg;
+	
+	pthread_mutex_lock(&philo->fork[(philo->id + 1) % philo->m_data->philo_count]);
+    pthread_mutex_lock(&philo->fork[philo->id]);
+	//m_data.time->time_passed = get_actual_time(m_data.philo->time);
+    print_status(philo, "is eating\n");
+    usleep(philo->m_data->time_to_eat * 1000);
+	philo->time->time_passed = get_actual_time(philo->time);
+	print_status(philo, "finished eating\n");
+	philo->last_meal = get_actual_time(philo->time);
+	philo->meal_counter++;
+	pthread_mutex_unlock(&philo->fork[philo->id]);
+	pthread_mutex_lock(&philo->fork[(philo->id + 1) % philo->m_data->philo_count]);
     return (NULL);
 }
 void *philo_sleeping(void *arg)
@@ -51,12 +69,24 @@ void *routine(void *arg)
 {
     t_philo *philo = (t_philo *)arg;
     
-    while (1)
-    {
-        philo_eating(&philo);
-        philo_sleeping(&philo);
-        philo_thinking(&philo);
-    }
+	if (philo->id % 2 == 0)
+	{
+		while (1)
+		{
+			philo_eating_even(&philo);
+			philo_sleeping(&philo);
+			philo_thinking(&philo);
+		}
+	}
+	if (philo->id % 2 != 0)
+	{
+		while (1)
+		{
+			philo_eating_uneven(&philo);
+			philo_sleeping(&philo);
+			philo_thinking(&philo);
+		}
+	}
     return (NULL);
 }
 /* void *routine(void *arg)
