@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 16:33:30 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/24 17:29:41 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct	s_philo
 	//int sleep_count;
 	//int	time_to_sleep;
 	//int	meals;
-	pthread_mutex_t *fork;
+	pthread_mutex_t *forks;
 	pthread_mutex_t *left_fork;
 	pthread_mutex_t *right_fork;
 	int last_meal;

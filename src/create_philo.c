@@ -6,12 +6,11 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 16:42:00 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/24 17:45:14 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <time.h>
 
 int	create_philo(t_philo *philo)
 {
@@ -29,10 +28,9 @@ int	create_philo(t_philo *philo)
             return(1);
         i++;
     }
-	printf("test2\n");
 	//philo->time->start_time = get_current_time();
 	monitoring(philo);
-	printf("test3\n");
+	printf("test6\n");
     i = 0;
     while (i < philo->m_data->philo_count)
     {
