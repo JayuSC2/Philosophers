@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 17:48:30 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/25 16:29:17 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void *philo_eating_even(void *arg)
 	
 	printf("%d\n", philo->id);
     pthread_mutex_lock(&philo->forks[philo->id]);
+	printf("test2\n");
 	print_status(philo, "has taken a fork\n");
     pthread_mutex_lock(&philo->forks[(philo->id + 1) % philo->m_data->philo_count]);
 	print_status(philo, "has taken a fork\n");
-	//m_data.time->time_passed = get_actual_time(m_data.philo->time);
     print_status(philo, "is eating\n");
     usleep(philo->m_data->time_to_eat * 1000);
 	philo->time->time_passed = get_actual_time(philo->time);
@@ -37,9 +37,11 @@ void *philo_eating_uneven(void *arg)
 {
 	t_philo *philo = (t_philo *)arg;
 	
+	printf("%d\n", philo->id);
 	pthread_mutex_lock(&philo->forks[(philo->id + 1) % philo->m_data->philo_count]);
+	print_status(philo, "has taken a fork\n");
     pthread_mutex_lock(&philo->forks[philo->id]);
-	//m_data.time->time_passed = get_actual_time(m_data.philo->time);
+	print_status(philo, "has taken a fork\n");
     print_status(philo, "is eating\n");
     usleep(philo->m_data->time_to_eat * 1000);
 	philo->time->time_passed = get_actual_time(philo->time);
@@ -86,7 +88,7 @@ void *routine(void *arg)
 	{
 		while (1)
 		{
-			printf("test2\n");
+			//printf("test2\n");
 			philo_eating_uneven(philo);
 			philo_sleeping(philo);
 			philo_thinking(philo);
