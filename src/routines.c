@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/26 15:12:30 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/26 15:38:49 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void *philo_eating_even(void *arg)
 	t_philo *philo = (t_philo *)arg;
 	
 	//printf("%d\n", philo->id);
-    pthread_mutex_lock(&philo->m_data->forks[philo->id]);
+    pthread_mutex_lock(&philo->right_fork);
 	print_status(philo, "has taken a fork\n");
-    pthread_mutex_lock(&philo->m_data->forks[(philo->id + 1) % philo->m_data->philo_count]);
+    pthread_mutex_lock(&philo->left_fork);
 	print_status(philo, "has taken a fork\n");
     print_status(philo, "is eating\n");
 	printf("%d", philo->m_data->time_to_eat);
@@ -28,8 +28,8 @@ void *philo_eating_even(void *arg)
 	print_status(philo, "finished eating\n");
 	philo->last_meal = get_actual_time(philo->time);
 	philo->meal_counter++;
-	pthread_mutex_unlock(&philo->m_data->forks[(philo->id + 1) % philo->m_data->philo_count]);
-	pthread_mutex_unlock(&philo->m_data->forks[philo->id]);
+	pthread_mutex_unlock(&philo->left_fork);
+	pthread_mutex_unlock(&philo->right_fork);
     return (NULL);
 }
 
@@ -41,9 +41,10 @@ void *philo_eating_uneven(void *arg)
     printf("Time to eat: %d\n", philo->m_data->time_to_eat);
     printf("Philo m_data pointer: %p\n", (void *)philo->m_data);
     printf("Philo time pointer: %p\n", (void *)philo->time);
-	pthread_mutex_lock(&philo->m_data->forks[(philo->id + 1) % philo->m_data->philo_count]);
+	printf ("%d", philo->left_fork);
+	pthread_mutex_lock(&philo->left_fork);
 	print_status(philo, "has taken a fork\n");
-    pthread_mutex_lock(&philo->m_data->forks[philo->id]);
+    pthread_mutex_lock(&philo->right_fork);
 	print_status(philo, "has taken a fork\n");
     print_status(philo, "is eating\n");
 	printf("Before usleep\n");
@@ -55,9 +56,9 @@ void *philo_eating_uneven(void *arg)
 	printf("%d\n", philo->last_meal);
 	philo->meal_counter++;
 	printf("%d\n", philo->meal_counter);
-	pthread_mutex_unlock(&philo->m_data->forks[philo->id]);
+	pthread_mutex_unlock(&philo->right_fork);
 	printf("test\n");
-	pthread_mutex_unlock(&philo->m_data->forks[(philo->id + 1) % philo->m_data->philo_count]);
+	pthread_mutex_unlock(&philo->left_fork);
 	printf("test2\n");
     return (NULL);
 }
@@ -84,16 +85,15 @@ void *routine(void *arg)
 {
     t_philo *philo = (t_philo *)arg;
     
-	if (philo->id % 2 == 0)
+/* 	if (philo->id % 2 == 0)
 	{
 		while (1)
 		{
-			usleep(1000);
 			philo_eating_even(philo);
 			philo_sleeping(philo);
 			philo_thinking(philo);
 		}
-	}
+	} */
 	if (philo->id % 2 != 0)
 	{
 		while (1)

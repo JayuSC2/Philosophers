@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/26 15:09:52 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/26 15:40:56 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,22 @@ int	mutex_init(t_metadata *m_data)
 	if (print_init(m_data) == 1)
 		return (1);
 	return (0);
+}
+
+int init_philosophers(t_philo *philos, t_metadata *m_data)
+{
+    int i;
+
+	i = 0;
+    while (i < m_data->philo_count)
+	{
+        philos[i].id = i;
+        philos[i].left_fork = m_data->forks[i];
+        philos[i].right_fork = m_data->forks[(i + 1) % m_data->philo_count];
+        philos[i].m_data = m_data;
+        i++;
+    }
+    return 0;
 }
 
 int	destroy_mutex(t_metadata *m_data)

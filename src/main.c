@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/26 15:13:05 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/26 15:32:01 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	if (init_variables(&philo, argc, argv) == 1)
 		return (/* free */1);
 	mutex_init(philo.m_data);
+	init_philosophers(&philo, philo.m_data);
 /* 	if (philo.m_data->philo_count == 1)
 	{
 		//create thread with 1 philo

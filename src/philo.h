@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/26 15:11:00 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/26 15:41:08 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ typedef struct	s_philo
 	//int	time_to_sleep;
 	//int	meals;
 	//pthread_mutex_t *forks;
-	pthread_mutex_t *left_fork;
-	pthread_mutex_t *right_fork;
+	pthread_mutex_t left_fork;
+	pthread_mutex_t right_fork;
 	int last_meal;
 	int	meal_counter;
 	//int forks;
@@ -121,4 +121,5 @@ int	get_actual_time(t_timer *timer);
 //init
 int	init_variables(t_philo *philo, int argc, char **argv);
 int	mutex_init(t_metadata *m_data);
+int init_philosophers(t_philo *philos, t_metadata *m_data);
 int	destroy_mutex(t_metadata *m_data);

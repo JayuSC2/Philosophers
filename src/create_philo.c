@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/26 12:42:42 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/26 15:33:03 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	create_philo(t_philo *philo)
             return(1);
         i++;
     }
+    printf("test5\n");
 	//philo->time->start_time = get_current_time();
 	monitoring(philo);
 	printf("test6\n");
