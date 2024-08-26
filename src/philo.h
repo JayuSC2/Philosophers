@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 17:29:41 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/26 15:11:00 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct	s_metadata
 	int time_to_eat;
 	int	time_to_sleep;
 	int	num_of_meals;
-	//pthread_mutex_t *forks;
+	pthread_mutex_t *forks;
 	pthread_mutex_t	print_lock;
 	//t_timer	*time;
 	//t_philo	*philo;
@@ -76,7 +76,7 @@ typedef struct	s_philo
 	//int sleep_count;
 	//int	time_to_sleep;
 	//int	meals;
-	pthread_mutex_t *forks;
+	//pthread_mutex_t *forks;
 	pthread_mutex_t *left_fork;
 	pthread_mutex_t *right_fork;
 	int last_meal;
@@ -120,5 +120,5 @@ int	get_actual_time(t_timer *timer);
 
 //init
 int	init_variables(t_philo *philo, int argc, char **argv);
-int	mutex_init(t_philo *philo);
-int	destroy_mutex(t_philo *philo);
+int	mutex_init(t_metadata *m_data);
+int	destroy_mutex(t_metadata *m_data);

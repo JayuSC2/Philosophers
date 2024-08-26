@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 17:29:37 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/26 15:09:52 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	init_variables(t_philo *philo, int argc, char **argv)
 	{
         return (1);
 	}
+	philo->time->current_time = 0;
+	philo->time->time_passed = 0;
 	philo->time->start_time = get_current_time();
 	philo = (t_philo *)malloc(sizeof(t_philo) * philo->m_data->philo_count);
 	if (philo == NULL)
@@ -39,21 +41,22 @@ int	init_variables(t_philo *philo, int argc, char **argv)
 	return (0);
 }
 
-int	mutex_init(t_philo *philo)
+int	forks_init(t_metadata *m_data)
 {
 	int i;
 
-	philo->forks = malloc (sizeof(pthread_mutex_t) * philo->m_data->philo_count);
-	if (philo->forks == NULL)
+	m_data->forks = malloc (sizeof(pthread_mutex_t) * m_data->philo_count);
+	if (m_data->forks == NULL)
 	{
 		printf("Error allocating memory");
 		return (1);
 	}
 	i = 0;
-	while (i < philo->m_data->philo_count)
+	while (i < m_data->philo_count)
 	{
-		if (pthread_mutex_init(&philo->forks[i], NULL) != 0)
+		if (pthread_mutex_init(&m_data->forks[i], NULL) != 0)
 		{
+			destroy_mutex(m_data);
 			printf("Error initializing mutex\n");
 			return (1);
 		}
@@ -62,21 +65,40 @@ int	mutex_init(t_philo *philo)
 	return (0);
 }
 
-int	destroy_mutex(t_philo *philo)
+int	print_init(t_metadata *m_data)
+{
+	if (pthread_mutex_init(&m_data->print_lock, NULL) != 0)
+	{
+		printf("Error initializing print mutex\n");
+		return (1);
+	}
+	return (0);
+}
+
+int	mutex_init(t_metadata *m_data)
+{
+	if (forks_init(m_data) == 1)
+		return (1);
+	if (print_init(m_data) == 1)
+		return (1);
+	return (0);
+}
+
+int	destroy_mutex(t_metadata *m_data)
 {
 	int i;
 
 	i = 0;
-	while (i < philo->m_data->philo_count)
+	while (i < m_data->philo_count)
 	{
-		if (pthread_mutex_destroy(&philo->forks[i]) != 0)
+		if (pthread_mutex_destroy(&m_data->forks[i]) != 0)
 		{
 			printf("Error destroying mutex\n");
 			return (1);
 		}
 		i++;
 	}
-	free(philo->forks);
+	free(m_data->forks);
 	return (0);
 }
 

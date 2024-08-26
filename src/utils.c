@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:19:47 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/23 18:16:17 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/26 14:37:50 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_status(t_philo *philo, char *status)
 {
 	pthread_mutex_lock(&philo->m_data->print_lock);
-	printf("%d %d %s\n", get_actual_time(philo->time), philo->id, status);
+	printf("%d: %d %s\n", get_actual_time(philo->time), philo->id, status);
 	pthread_mutex_unlock(&philo->m_data->print_lock);
 }
 int	ft_atoi(const char *str)
@@ -68,35 +68,7 @@ long int	ft_atol(const char *str)
 	}
 	return (num * sign);
 }
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
 
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-/* void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (s != 0)
-		write (fd, s, ft_strlen(s));
-}
-void	ft_putendl_fd(char *s, int fd)
-{
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
-}
-void	ft_error(char *str)
-{
-	ft_putendl_fd(str, 2);
-} */
 void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*ptr;
@@ -104,4 +76,18 @@ void	ft_bzero(void *s, size_t n)
 	ptr = s;
 	while (n-- > 0)
 		*ptr++ = 0;
+}
+
+void	smart_sleep(int time)
+{
+	int	start;
+	int	current;
+
+	start = get_actual_time(0);
+	current = get_actual_time(0);
+	while (current - start < time)
+	{
+		usleep(100);
+		current = get_actual_time(0);
+	}
 }
