@@ -6,25 +6,25 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/27 11:58:42 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/27 18:20:56 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	create_philo(t_philo *philo)
+int	create_philo(t_metadata *m_data)
 {
-    pthread_t threads[philo->m_data->philo_count];
+    pthread_t threads[m_data->philo_count];
     int i;
     
     i = 0;
-    while (i < philo->m_data->philo_count)
+    while (i < m_data->philo_count)
     {
-        philo[i].id = i + 1;
-        philo[i].time = philo->time;
-		philo[i].last_meal = get_actual_time(philo->time);
-		philo[i].eat_count = 0;
-        if (pthread_create(&threads[i], NULL, &routine, &philo[i]) != 0)
+        m_data->philo[i].id = i + 1;
+        //m_data->philo[i].time = philo->time;
+		m_data->philo[i].last_meal = get_actual_time(m_data->time);
+		m_data->philo[i].eat_count = 0;
+        if (pthread_create(&threads[i], NULL, &routine, &m_data->philo[i]) != 0)
 		{
 			printf("Error creating thread %d\n", i);
             return(1);
@@ -32,10 +32,10 @@ int	create_philo(t_philo *philo)
         i++;
     }
 	//philo->time->start_time = get_current_time();
-	if (monitoring(philo) == 1)
+	if (monitoring(m_data) == 1)
 		return (2);
     i = 0;
-    while (i < philo->m_data->philo_count)
+    while (i < m_data->philo_count)
     {
         if (pthread_join(threads[i], NULL) != 0)
         {

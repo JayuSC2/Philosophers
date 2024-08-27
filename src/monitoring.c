@@ -6,13 +6,13 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/27 11:56:13 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/27 18:20:21 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	monitoring(t_philo *philo)
+int	monitoring(t_metadata *m_data)
 {
     int i;
 	bool	print_flag;
