@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/26 15:40:56 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/27 12:39:39 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <pthread.h>
 
 int	init_variables(t_philo *philo, int argc, char **argv)
 {	
@@ -69,6 +70,7 @@ int	print_init(t_metadata *m_data)
 {
 	if (pthread_mutex_init(&m_data->print_lock, NULL) != 0)
 	{
+		destroy_mutex(m_data);
 		printf("Error initializing print mutex\n");
 		return (1);
 	}
@@ -84,7 +86,7 @@ int	mutex_init(t_metadata *m_data)
 	return (0);
 }
 
-int init_philosophers(t_philo *philos, t_metadata *m_data)
+int init_philos(t_philo *philos, t_metadata *m_data)
 {
     int i;
 
@@ -114,7 +116,13 @@ int	destroy_mutex(t_metadata *m_data)
 		}
 		i++;
 	}
+	if (pthread_mutex_destroy(&m_data->print_lock) != 0)
+	{
+		printf("Error destroying mutex\n");
+		return (1);
+	}
 	free(m_data->forks);
 	return (0);
 }
+
 

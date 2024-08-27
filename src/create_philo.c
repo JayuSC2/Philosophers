@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_philo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/26 15:33:03 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/27 11:58:42 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,24 @@ int	create_philo(t_philo *philo)
 		philo[i].last_meal = get_actual_time(philo->time);
 		philo[i].eat_count = 0;
         if (pthread_create(&threads[i], NULL, &routine, &philo[i]) != 0)
+		{
+			printf("Error creating thread %d\n", i);
             return(1);
+		}
         i++;
     }
-    printf("test5\n");
 	//philo->time->start_time = get_current_time();
-	monitoring(philo);
-	printf("test6\n");
+	if (monitoring(philo) == 1)
+		return (2);
     i = 0;
     while (i < philo->m_data->philo_count)
     {
-        printf("Joining thread %d\n", i);
         if (pthread_join(threads[i], NULL) != 0)
         {
             printf("Error joining thread %d\n", i);
-            return 1;
+            return (1);
         }
-        printf("Thread %d joined successfully\n", i);
         i++;
     }
-    printf("All threads joined\n");
 	return (0);
 }

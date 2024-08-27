@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/26 15:32:01 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/27 12:04:03 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	main(int argc, char **argv)
 		return (/* free */1);
 	if (init_variables(&philo, argc, argv) == 1)
 		return (/* free */1);
-	mutex_init(philo.m_data);
-	init_philosophers(&philo, philo.m_data);
+	if (mutex_init(philo.m_data) == 1)
+		return (/* free */1);
+	init_philos(&philo, philo.m_data);
 /* 	if (philo.m_data->philo_count == 1)
 	{
 		//create thread with 1 philo
@@ -31,8 +32,9 @@ int	main(int argc, char **argv)
 		return (printf("Philo 1 died"), 1);
 	} */
 	if (create_philo(&philo) == 1)
-		return (printf("Error creating philo\n"), 1);
-	printf("test5\n");
+		return (printf("Error creating philo\n"), destroy_mutex(philo.m_data), 1);
+	if (create_philo(&philo) == 2)
+		return (destroy_mutex(philo.m_data), 1);
 	destroy_mutex(philo.m_data);
 	return (0);
 }

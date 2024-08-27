@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 17:45:35 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/27 11:56:13 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	monitoring(t_philo *philo)
 {
     int i;
+	bool	print_flag;
 	
+	print_flag = false;
 	while (1)
 	{
 		i = 0;

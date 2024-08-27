@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/26 15:41:08 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/27 12:06:37 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ int	monitoring(t_philo *philo);
 int	get_current_time(void);
 int	get_actual_time(t_timer *timer);
 
-//init
+//init & destroy
 int	init_variables(t_philo *philo, int argc, char **argv);
 int	mutex_init(t_metadata *m_data);
-int init_philosophers(t_philo *philos, t_metadata *m_data);
+int init_philos(t_philo *philos, t_metadata *m_data);
 int	destroy_mutex(t_metadata *m_data);
