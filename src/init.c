@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/27 12:39:39 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/27 14:27:59 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ int	init_variables(t_philo *philo, int argc, char **argv)
 	philo->m_data->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		philo->m_data->num_of_meals = ft_atoi(argv[5]);
-	philo->time = (t_timer *)malloc(sizeof(t_timer));
-    if (philo->time == NULL)
+	philo->timer = (t_timer *)malloc(sizeof(t_timer));
+    if (philo->timer == NULL)
 	{
-        return (1);
+        return (free(philo),1);
 	}
-	philo->time->current_time = 0;
-	philo->time->time_passed = 0;
-	philo->time->start_time = get_current_time();
+	philo->timer->current_time = 0;
+	philo->timer->time_passed = 0;
+	philo->timer->start_time = get_current_time();
 	philo = (t_philo *)malloc(sizeof(t_philo) * philo->m_data->philo_count);
 	if (philo == NULL)
 	{
-		return (1);
+		return (free(philo), 1);
 	}
 	return (0);
 }

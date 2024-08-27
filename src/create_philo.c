@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/27 11:58:42 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/27 13:51:27 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	create_philo(t_philo *philo)
     while (i < philo->m_data->philo_count)
     {
         philo[i].id = i + 1;
-        philo[i].time = philo->time;
-		philo[i].last_meal = get_actual_time(philo->time);
+        philo[i].timer = philo->timer;
+		philo[i].last_meal = get_actual_time(philo->timer);
 		philo[i].eat_count = 0;
         if (pthread_create(&threads[i], NULL, &routine, &philo[i]) != 0)
 		{

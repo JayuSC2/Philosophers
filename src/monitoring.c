@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/27 11:56:13 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/27 14:38:06 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 int	monitoring(t_philo *philo)
 {
     int i;
-	bool	print_flag;
-	
-	print_flag = false;
+
 	while (1)
 	{
 		i = 0;
 		while (i < philo->m_data->philo_count)
 		{
-			philo->time->current_time = get_actual_time(philo[i].time);
-			if (philo->time->current_time - philo[i].last_meal > philo->m_data->time_to_die)
+			philo->timer->current_time = get_actual_time(philo[i].timer);
+			if (philo->timer->current_time - philo[i].last_meal > philo->m_data->time_to_die)
 			{
-				printf("%d: %d died\n", philo->time->current_time, philo[i].id);
+				philo->death_flag = true;
+				printf("%d %d died\n", philo->timer->current_time, philo[i].id);
 				return (1);
 			}
 			if (philo[i].eat_count == philo->m_data->num_of_meals && philo->m_data->num_of_meals != 0)
 			{
+				philo[i].is_full = true;
 				printf("%d is full", philo[i].id);
 				return (1);
 			}

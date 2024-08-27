@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/27 12:29:18 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/27 13:57:59 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void *philo_eating_even(void *arg)
     print_status(philo, "is eating");
 	//printf("%d", philo->m_data->time_to_eat);
     usleep(philo->m_data->time_to_eat * 1000);
-	philo->time->time_passed = get_actual_time(philo->time);
+	philo->timer->time_passed = get_actual_time(philo->timer);
 	print_status(philo, "finished eating");
-	philo->last_meal = get_actual_time(philo->time);
+	philo->last_meal = get_actual_time(philo->timer);
 	philo->meal_counter++;
 	pthread_mutex_unlock(&philo->left_fork);
 	pthread_mutex_unlock(&philo->right_fork);
@@ -43,9 +43,9 @@ void *philo_eating_uneven(void *arg)
 	print_status(philo, "has taken a fork");
     print_status(philo, "is eating");
     usleep(philo->m_data->time_to_eat * 1000);
-	philo->time->time_passed = get_actual_time(philo->time);
+	philo->timer->time_passed = get_actual_time(philo->timer);
 	print_status(philo, "finished eating");
-	philo->last_meal = get_actual_time(philo->time);
+	philo->last_meal = get_actual_time(philo->timer);
 	philo->meal_counter++;
 	pthread_mutex_unlock(&philo->right_fork);
 	pthread_mutex_unlock(&philo->left_fork);
