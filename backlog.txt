@@ -1,0 +1,3 @@
+- fix mutex destroy error
+- fix leaks
+- fix odd number unwanted deaths
