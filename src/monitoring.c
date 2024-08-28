@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 14:54:10 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 14:57:50 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	monitoring(t_metadata *m_data)
         while (i < m_data->philo_count)
         {
             m_data->time->time_passed = get_actual_time(m_data->time);
-            if (m_data->time->time_passed - m_data->philo[i].last_meal > m_data->time_to_die)
+            if (m_data->time->time_passed - m_data->philo[i].last_meal > m_data->time_to_die && m_data->philo[i].is_full == false)
             {
                 m_data->death_flag = true;
                 printf("%d %d died\n", m_data->time->time_passed, m_data->philo[i].id);
