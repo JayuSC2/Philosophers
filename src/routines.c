@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 14:54:47 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 15:11:14 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void *routine(void *arg)
 	{
 		while (1)
 		{
-			if (philo->m_data->death_flag == true)
+			if (philo->m_data->death_flag == true || philo->m_data->all_full == true)
 				return (NULL);
 			if (philo->is_full == false)
 			{
@@ -88,7 +88,7 @@ void *routine(void *arg)
 	{
 		while (1)
 		{
-			if (philo->m_data->death_flag == true)
+			if (philo->m_data->death_flag == true || philo->m_data->all_full == true)
 				return (NULL);
 			if (philo->is_full == false)
 			{

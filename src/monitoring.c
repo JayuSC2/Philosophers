@@ -6,13 +6,55 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 14:57:50 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 15:12:33 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	monitoring(t_metadata *m_data)
+int monitoring(t_metadata *m_data)
+{
+    int i;
+    int full_count;
+
+    full_count = 0;
+    while (1)
+    {
+        if (m_data->death_flag || m_data->all_full)
+        {
+            break ;
+        }
+        i = 0;
+        while (i < m_data->philo_count)
+        {
+            m_data->time->time_passed = get_actual_time(m_data->time);
+            if (m_data->time->time_passed - m_data->philo[i].last_meal > m_data->time_to_die)
+            {
+                m_data->death_flag = true;
+                printf("%d %d died\n", m_data->time->time_passed, m_data->philo[i].id);
+                return (1);
+            }
+            if (m_data->philo[i].meal_counter == m_data->philo->m_data->num_of_meals && m_data->philo->m_data->num_of_meals != 0)
+            {
+                if (!m_data->philo[i].is_full)
+                {
+                    m_data->philo[i].is_full = true;
+                    full_count++;
+                    //printf("%d is full\n", m_data->philo[i].id);
+                }
+            }
+            i++;
+        }
+        if (full_count == m_data->philo_count)
+        {
+            m_data->all_full = true;
+        }
+        usleep(1000);
+    }
+    return (0);
+}
+
+/* int	monitoring(t_metadata *m_data)
 {
     int i;
 
@@ -43,7 +85,7 @@ int	monitoring(t_metadata *m_data)
         usleep(1000);
     }
 	return (0);
-}
+} */
 
 
 /* int	monitoring(t_philo *philo)
