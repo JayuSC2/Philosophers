@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 13:51:55 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 18:08:02 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@ int main(int argc, char **argv)
     if (init_variables(&m_data, argc, argv) == 1)
         return (free_metadata(&m_data), 1);
     if (mutex_init(&m_data) == 1)
-        return (free_metadata(&m_data), 1);
+    	return (free_metadata(&m_data), 1);
     init_philos(&m_data);
 	error_check = create_philo(&m_data);
-    if (create_philo(&m_data) == 1)
-		return (free_metadata(&m_data), 1);
-	if (create_philo(&m_data) == 2)
+    if ((error_check) == 1 || ((error_check) == 2))
 		return (free_metadata(&m_data), 1);
     destroy_mutex(&m_data);
 	free_metadata(&m_data);

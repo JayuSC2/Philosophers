@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 17:36:25 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 17:59:11 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void *philo_eating_even(t_philo *philo)
 	print_status(philo, "finished eating");
 	philo->last_meal = get_actual_time(philo->m_data->time);
 	philo->meal_counter++;
-	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
     return (NULL);
 }
 
@@ -42,8 +42,8 @@ void *philo_eating_uneven(t_philo *philo)
 	print_status(philo, "finished eating");
 	philo->last_meal = get_actual_time(philo->m_data->time);
 	philo->meal_counter++;
-	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
     return (NULL);
 }
 void *philo_sleeping(t_philo *philo)
@@ -62,6 +62,26 @@ void *routine(void *arg)
 {
     t_philo *philo = (t_philo *)arg;
     
+		if (philo->id % 2 != 0)
+	{
+		while (1)
+		{
+			if (philo->m_data->death_flag == true || philo->m_data->all_full == true)
+				return (NULL);
+			if (philo->is_full == false)
+			{
+				philo_eating_uneven(philo);
+				philo_sleeping(philo);
+				philo_thinking(philo);
+			}
+			else if (philo->is_full == true && philo->m_data->death_flag == false)
+			{
+				philo_sleeping(philo);
+				philo_thinking(philo);
+				break ;
+			}
+		}
+	}	
 	if (philo->id % 2 == 0)
 	{
 		while (1)
@@ -82,27 +102,7 @@ void *routine(void *arg)
 			}
 		}
 	}
-	if (philo->id % 2 != 0)
-	{
-		while (1)
-		{
-			if (philo->m_data->death_flag == true || philo->m_data->all_full == true)
-				return (NULL);
-			if (philo->is_full == false)
-			{
-				philo_eating_uneven(philo);
-				philo_sleeping(philo);
-				philo_thinking(philo);
-			}
-			else if (philo->is_full == true && philo->m_data->death_flag == false)
-			{
-				philo_sleeping(philo);
-				philo_thinking(philo);
-				break ;
-			}
-		}
-	}
-    return (NULL);
+	return (NULL);
 }
 /* void *routine(void *arg)
 {
