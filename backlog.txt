@@ -1,3 +1,5 @@
 - fix mutex destroy error - done
 - fix leaks
 - fix odd number unwanted deaths
+- don't forget to remove this before submitting lol
+- single philo case

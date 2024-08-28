@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 17:59:11 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 18:42:42 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void *routine(void *arg)
 {
     t_philo *philo = (t_philo *)arg;
     
-		if (philo->id % 2 != 0)
+	if (philo->id % 2 != 0)
 	{
 		while (1)
 		{
