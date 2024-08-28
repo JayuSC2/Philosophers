@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/27 19:10:16 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 11:56:27 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct	s_timer
 
 typedef struct	s_philo
 {
-	typedef struct s_metadata m_data;
+	struct s_metadata *m_data;
 	int id;
 	int eat_count;
 	pthread_mutex_t left_fork;
@@ -57,9 +57,9 @@ typedef struct	s_metadata
 
 //philo
 int			create_philo(t_metadata *m_data);
-void		*philo_eating(t_philo philo);
-void		*philo_sleeping(t_philo philo);
-void		*philo_thinking(t_philo philo);
+void		*philo_eating(t_philo *philo);
+void		*philo_sleeping(t_philo *philo);
+void		*philo_thinking(t_philo *philo);
 void		*routine(void *routine);
 
 //utils

@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/27 18:20:21 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 12:01:01 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ int	monitoring(t_metadata *m_data)
 	while (1)
 	{
 		i = 0;
-		while (i < philo->m_data->philo_count)
+		while (i < m_data->philo_count)
 		{
-			philo->time->current_time = get_actual_time(philo[i].time);
-			if (philo->time->current_time - philo[i].last_meal > philo->m_data->time_to_die)
+			m_data->time->time_passed = get_actual_time(m_data->time);
+			if (m_data->time->time_passed - m_data->philo[i].last_meal > m_data->time_to_die)
 			{
-				printf("%d: %d died\n", philo->time->current_time, philo[i].id);
+				printf("%d: %d died\n", m_data->time->current_time, m_data->philo[i].id);
 				return (1);
 			}
-			if (philo[i].eat_count == philo->m_data->num_of_meals && philo->m_data->num_of_meals != 0)
+			if (m_data->philo[i].eat_count == m_data->philo->m_data->num_of_meals && m_data->philo->m_data->num_of_meals != 0)
 			{
-				printf("%d is full", philo[i].id);
+				printf("%d is full", m_data->philo[i].id);
 				return (1);
 			}
 			i++;

@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:19:47 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/27 12:09:04 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 11:56:49 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_status(t_philo *philo, char *status)
 {
 	pthread_mutex_lock(&philo->m_data->print_lock);
-	printf("%d %d %s\n", get_actual_time(philo->time), philo->id, status);
+	printf("%d %d %s\n", get_actual_time(philo->m_data->time), philo->id, status);
 	pthread_mutex_unlock(&philo->m_data->print_lock);
 }
 int	ft_atoi(const char *str)
