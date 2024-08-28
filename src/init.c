@@ -6,33 +6,29 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/27 18:18:49 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 13:42:09 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 int init_variables(t_metadata *m_data, int argc, char **argv)
-{
+{	
     m_data->philo_count = ft_atoi(argv[1]);
     m_data->time_to_die = ft_atoi(argv[2]);
     m_data->time_to_eat = ft_atoi(argv[3]);
     m_data->time_to_sleep = ft_atoi(argv[4]);
     if (argc == 6)
         m_data->num_of_meals = ft_atoi(argv[5]);
-
     m_data->philo = (t_philo *)malloc(sizeof(t_philo) * m_data->philo_count);
     if (m_data->philo == NULL)
         return (1);
-
     m_data->time = (t_timer *)malloc(sizeof(t_timer));
     if (m_data->time == NULL)
         return (1);
-
     m_data->time->current_time = 0;
     m_data->time->time_passed = 0;
     m_data->time->start_time = get_current_time();
-
     return (0);
 }
 

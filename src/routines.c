@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 11:55:38 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 14:06:19 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void *routine(void *arg)
 	{
 		while (1)
 		{
+			if (philo->m_data->death_flag == true)
+				return (NULL);
 			philo_eating_even(philo);
 			philo_sleeping(philo);
 			philo_thinking(philo);
@@ -78,6 +80,8 @@ void *routine(void *arg)
 	{
 		while (1)
 		{
+			if (philo->m_data->death_flag == true)
+				return (NULL);
 			philo_eating_uneven(philo);
 			philo_sleeping(philo);
 			philo_thinking(philo);

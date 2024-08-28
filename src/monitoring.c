@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 12:01:01 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 14:07:57 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,36 @@
 int	monitoring(t_metadata *m_data)
 {
     int i;
-	bool	print_flag;
-	
-	print_flag = false;
-	while (1)
-	{
-		i = 0;
-		while (i < m_data->philo_count)
-		{
-			m_data->time->time_passed = get_actual_time(m_data->time);
-			if (m_data->time->time_passed - m_data->philo[i].last_meal > m_data->time_to_die)
-			{
-				printf("%d: %d died\n", m_data->time->current_time, m_data->philo[i].id);
-				return (1);
-			}
-			if (m_data->philo[i].eat_count == m_data->philo->m_data->num_of_meals && m_data->philo->m_data->num_of_meals != 0)
-			{
-				printf("%d is full", m_data->philo[i].id);
-				return (1);
-			}
-			i++;
-		}
-		usleep(1000);
-	}
+
+    while (1)
+    {
+        if (m_data->death_flag)
+        {
+            break ;
+        }
+        i = 0;
+        while (i < m_data->philo_count)
+        {
+            m_data->time->time_passed = get_actual_time(m_data->time);
+            if (m_data->time->time_passed - m_data->philo[i].last_meal > m_data->time_to_die)
+            {
+                m_data->death_flag = true;
+                printf("%d %d died\n", m_data->time->time_passed, m_data->philo[i].id);
+                return (1);
+            }
+            if (m_data->philo[i].eat_count == m_data->philo->m_data->num_of_meals && m_data->philo->m_data->num_of_meals != 0)
+            {
+                m_data->philo[i].is_full = true;
+                printf("%d is full", m_data->philo[i].id);
+                return (1);
+            }
+            i++;
+        }
+        usleep(1000);
+    }
 	return (0);
 }
+
 
 /* int	monitoring(t_philo *philo)
 {

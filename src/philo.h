@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 11:56:27 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 13:23:55 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct	s_philo
 	pthread_mutex_t right_fork;
 	int last_meal;
 	int	meal_counter;
-	bool death_flag;
 	bool is_full;
 }			t_philo;
 typedef struct	s_metadata
@@ -48,6 +47,8 @@ typedef struct	s_metadata
 	int time_to_eat;
 	int	time_to_sleep;
 	int	num_of_meals;
+	bool death_flag;
+	bool all_full;
 	pthread_mutex_t *forks;
 	pthread_mutex_t	print_lock;
 	t_timer	*time;
@@ -87,3 +88,5 @@ int init_variables(t_metadata *m_data, int argc, char **argv);
 int	mutex_init(t_metadata *m_data);
 int init_philos(t_metadata *m_data);
 int	destroy_mutex(t_metadata *m_data);
+int	free_all(t_metadata *m_data);
+void free_metadata(t_metadata *m_data);
