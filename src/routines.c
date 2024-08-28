@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 14:31:25 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 14:54:47 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void *philo_eating_even(void *arg)
 {
 	t_philo *philo = (t_philo *)arg;
 	
-	//printf("%d\n", philo->id);
     pthread_mutex_lock(&philo->right_fork);
 	print_status(philo, "has taken a fork");
     pthread_mutex_lock(&philo->left_fork);
@@ -71,9 +70,18 @@ void *routine(void *arg)
 		{
 			if (philo->m_data->death_flag == true)
 				return (NULL);
-			philo_eating_even(philo);
-			philo_sleeping(philo);
-			philo_thinking(philo);
+			if (philo->is_full == false)
+			{
+				philo_eating_even(philo);
+				philo_sleeping(philo);
+				philo_thinking(philo);
+			}
+			else if (philo->is_full == true)
+			{
+				philo_sleeping(philo);
+				philo_thinking(philo);
+				break ;
+			}
 		}
 	}
 	if (philo->id % 2 != 0)
@@ -82,9 +90,18 @@ void *routine(void *arg)
 		{
 			if (philo->m_data->death_flag == true)
 				return (NULL);
-			philo_eating_uneven(philo);
-			philo_sleeping(philo);
-			philo_thinking(philo);
+			if (philo->is_full == false)
+			{
+				philo_eating_even(philo);
+				philo_sleeping(philo);
+				philo_thinking(philo);
+			}
+			else if (philo->is_full == true)
+			{
+				philo_sleeping(philo);
+				philo_thinking(philo);
+				break ;
+			}
 		}
 	}
     return (NULL);

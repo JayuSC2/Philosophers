@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 13:23:55 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 14:53:10 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct	s_philo
 {
 	struct s_metadata *m_data;
 	int id;
-	int eat_count;
 	pthread_mutex_t left_fork;
 	pthread_mutex_t right_fork;
 	int last_meal;

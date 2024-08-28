@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 13:42:09 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 14:44:35 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int init_variables(t_metadata *m_data, int argc, char **argv)
     m_data->time_to_die = ft_atoi(argv[2]);
     m_data->time_to_eat = ft_atoi(argv[3]);
     m_data->time_to_sleep = ft_atoi(argv[4]);
+	m_data->death_flag = false;
+	m_data->all_full = false;
     if (argc == 6)
         m_data->num_of_meals = ft_atoi(argv[5]);
     m_data->philo = (t_philo *)malloc(sizeof(t_philo) * m_data->philo_count);
@@ -86,6 +88,7 @@ int init_philos(t_metadata *m_data)
         m_data->philo[i].id = i;
         m_data->philo[i].left_fork = m_data->forks[i];
         m_data->philo[i].right_fork = m_data->forks[(i + 1) % m_data->philo_count];
+		m_data->philo[i].is_full = false;
         m_data->philo[i].m_data = m_data;
         i++;
     }
