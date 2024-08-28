@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 15:12:33 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 16:25:53 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int monitoring(t_metadata *m_data)
                 {
                     m_data->philo[i].is_full = true;
                     full_count++;
-                    //printf("%d is full\n", m_data->philo[i].id);
+                    printf("%d is full\n", m_data->philo[i].id);
                 }
             }
             i++;

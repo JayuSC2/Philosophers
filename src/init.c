@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 14:44:35 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 17:12:48 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,14 @@ int init_philos(t_metadata *m_data)
     i = 0;
     while (i < m_data->philo_count)
     {
-        m_data->philo[i].id = i;
-        m_data->philo[i].left_fork = m_data->forks[i];
-        m_data->philo[i].right_fork = m_data->forks[(i + 1) % m_data->philo_count];
+        m_data->philo[i].id = i + 1;
+        m_data->philo[i].left_fork = &m_data->forks[i];
+        m_data->philo[i].right_fork = &m_data->forks[(i + 1) % m_data->philo_count];
 		m_data->philo[i].is_full = false;
-        m_data->philo[i].m_data = m_data;
+        //m_data->philo[i].m_data = m_data;
+		m_data->philo[i].last_meal = get_actual_time(m_data->time);
+		m_data->philo[i].meal_counter = 0;
+		m_data->philo[i].m_data = m_data;
         i++;
     }
     return 0;
@@ -104,14 +107,14 @@ int destroy_mutex(t_metadata *m_data)
     {
         if (pthread_mutex_destroy(&m_data->forks[i]) != 0)
         {
-            printf("Error destroying mutex\n");
+            printf("Error destroying fork_mutex\n");
             return (1);
         }
         i++;
     }
     if (pthread_mutex_destroy(&m_data->print_lock) != 0)
     {
-        printf("Error destroying mutex\n");
+        printf("Error destroying print_mutex\n");
         return (1);
     }
     free(m_data->forks);

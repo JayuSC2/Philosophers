@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 14:53:31 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/28 16:28:47 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	create_philo(t_metadata *m_data)
     i = 0;
     while (i < m_data->philo_count)
     {
-        m_data->philo[i].id = i + 1;
+        //m_data->philo[i].id = i + 1;
         //m_data->philo[i].time = philo->time;
-		m_data->philo[i].last_meal = get_actual_time(m_data->time);
-		m_data->philo[i].meal_counter = 0;
+		//m_data->philo[i].last_meal = get_actual_time(m_data->time);
+		//m_data->philo[i].meal_counter = 0;
         if (pthread_create(&threads[i], NULL, &routine, &m_data->philo[i]) != 0)
 		{
 			printf("Error creating thread %d\n", i);
