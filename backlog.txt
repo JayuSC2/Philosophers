@@ -1,6 +1,6 @@
 - fix mutex destroy error - done
 - fix leaks
-- fix odd number unwanted deaths
+- fix odd number unwanted deaths - done
 - remove unnecessary prints (left fork, right fork)
 - don't forget to remove this before submitting lol
 - single philo case
