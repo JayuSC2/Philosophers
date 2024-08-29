@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/29 18:37:00 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/29 21:26:26 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void philo_eating(t_philo *philo)
 	pthread_mutex_lock(&philo->m_data->eating_lock);
 	philo->last_meal = get_actual_time(philo->m_data->time);
 	pthread_mutex_unlock(&philo->m_data->eating_lock);
+    //smart_sleep(philo->m_data->time_to_eat * 1000, philo->m_data->time);
     usleep(philo->m_data->time_to_eat * 1000);
 	//philo->m_data->time->time_passed = get_actual_time(philo->m_data->time);
 	print_status(philo, "finished eating");
@@ -50,6 +51,7 @@ void philo_eating(t_philo *philo)
 void philo_sleeping(t_philo *philo)
 {
 	print_status(philo, "is sleeping");
+    //smart_sleep(philo->m_data->time_to_sleep * 1000, philo->m_data->time);
 	usleep(philo->m_data->time_to_sleep * 1000);
 }
 void philo_thinking(t_philo *philo)
@@ -62,7 +64,7 @@ void *routine(void *arg)
     t_philo *philo = (t_philo *)arg;
 
     if (philo->id % 2 == 0)
-        usleep(20);
+        usleep(30);
     while (1)
     {
         if (philo->m_data->death_flag == true || philo->m_data->all_full == true)

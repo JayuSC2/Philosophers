@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/29 18:36:16 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/29 21:19:08 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	monitoring(t_metadata *m_data);
 //timer
 int	get_current_time(void);
 int	get_actual_time(t_timer *timer);
+void	smart_sleep(int time, t_timer *timer);
 
 //init & destroy
 int init_variables(t_metadata *m_data, int argc, char **argv);

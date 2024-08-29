@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   timecheck.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:13:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/21 17:20:52 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/29 21:23:40 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,17 @@ int	get_actual_time(t_timer *timer)
 	timer->current_time = get_current_time();
 	timer->time_passed = (timer->current_time - timer->start_time);
 	return (timer->time_passed);
+}
+void	smart_sleep(int time, t_timer *timer)
+{
+	int	start_time;
+	int	current_time;
+	
+	start_time = get_actual_time(timer);
+	current_time = start_time;
+	while (current_time - start_time < time)
+	{
+		current_time = get_actual_time(timer);
+		usleep(100);
+	}
 }
