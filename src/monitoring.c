@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 16:25:53 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/29 16:27:39 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int monitoring(t_metadata *m_data)
             if (m_data->time->time_passed - m_data->philo[i].last_meal > m_data->time_to_die)
             {
                 m_data->death_flag = true;
-                printf("%d %d died\n", m_data->time->time_passed, m_data->philo[i].id);
+				print_status(&m_data->philo[i], "died");
+                //printf("%d %d died\n", m_data->time->time_passed, m_data->philo[i].id);
                 return (1);
             }
             if (m_data->philo[i].meal_counter == m_data->philo->m_data->num_of_meals && m_data->philo->m_data->num_of_meals != 0)
@@ -53,6 +54,48 @@ int monitoring(t_metadata *m_data)
     }
     return (0);
 }
+/* 
+bool all_philosophers_satiated(t_metadata *m_data)
+{
+    int i;
+    int min_eat_count;
+	m_data->all_satiated = false;
+	
+	min_eat_count = m_data->philo[0].meal_counter;
+	i = 1;
+    while (i < m_data->philo_count)
+    {
+        if (m_data->philo[i].meal_counter < min_eat_count)
+            return (false);
+		i++;
+    }
+    return (true);
+}
+
+void eating_priority(t_philo *philo)
+{
+    int i;
+
+    philo->m_data->all_satiated = false;
+    if (philo->m_data->all_satiated == false)
+    {
+		if (all_philosophers_satiated(philo->m_data))
+			philo->m_data->all_satiated = true;
+		philo->can_eat = true;
+		pthread_mutex_lock(&philo->m_data->eat_count);
+		i = 0;
+		while (i < philo->m_data->philo_count)
+		{
+			if (philo[i].meal_counter < philo->meal_counter)
+			{
+				philo->can_eat = false;
+				break ;
+			}
+			i++;
+		}
+		pthread_mutex_unlock(&philo->m_data->eat_count);
+	}
+} */
 
 /* int	monitoring(t_metadata *m_data)
 {

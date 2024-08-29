@@ -6,11 +6,12 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 18:07:02 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/29 16:16:02 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+#include <pthread.h>
 
 int init_variables(t_metadata *m_data, int argc, char **argv)
 {	
@@ -57,6 +58,17 @@ int forks_init(t_metadata *m_data)
     }
     return (0);
 }
+
+/* int eat_count_init(t_metadata *m_data)
+{
+    if (pthread_mutex_init(&m_data->eat_count, NULL) != 0)
+    {
+        destroy_mutex(m_data);
+        printf("Error initializing eat_count mutex\n");
+        return (1);
+    }
+    return (0);
+} */
 
 int print_init(t_metadata *m_data)
 {
@@ -116,6 +128,11 @@ int destroy_mutex(t_metadata *m_data)
         printf("Error destroying print_mutex\n");
         return (1);
     }
+/* 	if (pthread_mutex_destroy(&m_data->eat_count) != 0)
+	{
+		 printf("Error destroying eat_count_mutex\n");
+		 return (1);
+	} */
     free(m_data->forks);
     return (0);
 }

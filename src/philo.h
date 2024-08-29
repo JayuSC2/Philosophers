@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 16:59:06 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/29 15:03:31 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_philo
 	int last_meal;
 	int	meal_counter;
 	bool is_full;
+	bool can_eat;
 }			t_philo;
 typedef struct	s_metadata
 {
@@ -47,9 +48,11 @@ typedef struct	s_metadata
 	int	time_to_sleep;
 	int	num_of_meals;
 	bool death_flag;
+	bool all_satiated;
 	bool all_full;
 	pthread_mutex_t *forks;
 	pthread_mutex_t	print_lock;
+	pthread_mutex_t eat_count;
 	t_timer	*time;
 	t_philo	*philo;
 }				t_metadata;
