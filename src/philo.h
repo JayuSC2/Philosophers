@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/29 15:03:31 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/29 18:36:16 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct	s_metadata
 	bool all_full;
 	pthread_mutex_t *forks;
 	pthread_mutex_t	print_lock;
-	pthread_mutex_t eat_count;
+	pthread_mutex_t eating_lock;
 	t_timer	*time;
 	t_philo	*philo;
 }				t_metadata;
@@ -60,9 +60,9 @@ typedef struct	s_metadata
 
 //philo
 int			create_philo(t_metadata *m_data);
-void		*philo_eating(t_philo *philo);
-void		*philo_sleeping(t_philo *philo);
-void		*philo_thinking(t_philo *philo);
+void		philo_eating(t_philo *philo);
+void		philo_sleeping(t_philo *philo);
+void		philo_thinking(t_philo *philo);
 void		*routine(void *routine);
 
 //utils
