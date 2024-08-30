@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 16:17:23 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/30 17:00:57 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,16 @@ int print_init(t_metadata *m_data)
     }
     return (0);
 }
+int time_init(t_metadata *m_data)
+{
+	if (pthread_mutex_init(&m_data->time_lock, NULL) != 0)
+    {
+        destroy_mutex(m_data);
+        printf("Error initializing time mutex\n");
+        return (1);
+    }
+    return (0);
+}
 
 int mutex_init(t_metadata *m_data)
 {
@@ -113,6 +123,8 @@ int mutex_init(t_metadata *m_data)
     if (print_init(m_data) == 1)
 		return (1);
 	if (eating_init(m_data) == 1)
+		return (1);
+	if (time_init(m_data) == 1)
 		return (1);
     return (0);
 }
@@ -137,6 +149,11 @@ int destroy_mutex(t_metadata *m_data)
         return (1);
     }
 	if (pthread_mutex_destroy(&m_data->eating_lock) != 0)
+	{
+		 printf("Error destroying eating_mutex\n");
+		 return (1);
+	}
+		if (pthread_mutex_destroy(&m_data->time_lock) != 0)
 	{
 		 printf("Error destroying eating_mutex\n");
 		 return (1);

@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 16:13:36 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/30 17:21:59 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct	s_philo
 	int id;
 	pthread_mutex_t *left_fork;
 	pthread_mutex_t *right_fork;
+	int left_fork_locked;
+	int right_fork_locked;
 	int last_meal;
 	int	meal_counter;
 	bool is_full;
@@ -51,6 +53,7 @@ typedef struct	s_metadata
 	bool death_flag;
 	bool all_satiated;
 	bool all_full;
+	pthread_mutex_t time_lock;
 	pthread_mutex_t *forks;
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t eating_lock;
