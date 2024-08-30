@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:18:13 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 10:58:40 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/30 16:18:01 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int main(int argc, char **argv)
         return (free_all(&m_data), 1);
     if (mutex_init(&m_data) == 1)
     	return (free_all(&m_data), 1);
-    init_philos(&m_data);
+    if (init_philos(&m_data) == 1)
+		return (free_all(&m_data), 1);
 	error_check = create_philo(&m_data);
     if ((error_check) == 1 || ((error_check) == 2))
 		return (free_all(&m_data), 1);

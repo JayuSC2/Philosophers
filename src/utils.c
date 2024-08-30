@@ -6,17 +6,23 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:19:47 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/28 11:56:49 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/30 16:22:29 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_status(t_philo *philo, char *status)
+int	print_status(t_philo *philo, char *status)
 {
+	int actual_time;
+
 	pthread_mutex_lock(&philo->m_data->print_lock);
-	printf("%d %d %s\n", get_actual_time(philo->m_data->time), philo->id, status);
+	actual_time = get_actual_time(philo->m_data->time);
+	if (actual_time == -1)
+		philo->fatal = true;
+	printf("%d %d %s\n", actual_time, philo->id, status);
 	pthread_mutex_unlock(&philo->m_data->print_lock);
+	return (0);
 }
 int	ft_atoi(const char *str)
 {
