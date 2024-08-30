@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/29 21:19:08 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/30 11:29:31 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,11 @@ int	monitoring(t_metadata *m_data);
 //timer
 int	get_current_time(void);
 int	get_actual_time(t_timer *timer);
-void	smart_sleep(int time, t_timer *timer);
+void smart_sleep(int time, t_metadata *m_data);
 
 //init & destroy
-int init_variables(t_metadata *m_data, int argc, char **argv);
+int init_m_data(t_metadata *m_data, int argc, char **argv);
 int	mutex_init(t_metadata *m_data);
 int init_philos(t_metadata *m_data);
 int	destroy_mutex(t_metadata *m_data);
-int	free_all(t_metadata *m_data);
-void free_metadata(t_metadata *m_data);
+void free_all(t_metadata *m_data);
