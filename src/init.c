@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 10:54:52 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:04:49 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ int init_m_data(t_metadata *m_data, int argc, char **argv)
 	m_data->death_flag = false;
 	m_data->all_full = false;
     if (argc == 6)
+	{
         m_data->num_of_meals = ft_atoi(argv[5]);
+		if (m_data->num_of_meals == 0)
+			return (printf("Error: num_of_meals can't be 0\n"), 1);
+	}
     m_data->philo = (t_philo *)malloc(sizeof(t_philo) * m_data->philo_count);
     if (m_data->philo == NULL)
         return (1);

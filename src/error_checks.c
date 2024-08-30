@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_checks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:17:06 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/29 21:11:31 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:00:06 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	ft_check_args(int argc, char **argv)
 	i = 1;
 	if (argc != 5 && argc != 6)
 		 return (printf("Error: Invalid number of arguments\n"), 1);
+	//if (argv[5][0] == '0')
 	while(i < argc)
 	{
 		if (!ft_isnumber(argv[i]))
