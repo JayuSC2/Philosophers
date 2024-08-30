@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 15:04:49 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/30 15:19:23 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,5 @@ int destroy_mutex(t_metadata *m_data)
 		 printf("Error destroying eating_mutex\n");
 		 return (1);
 	}
-    free(m_data->forks);
-    return (0);
+	return (0);
 }
-
-
