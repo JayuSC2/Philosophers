@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 17:23:06 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/30 19:31:23 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void philo_eating(t_philo *philo)
 	philo->last_meal = get_actual_time(philo->m_data->time);
 	if (philo->last_meal == -1)
 		philo->fatal = true;
+    smart_sleep(philo->m_data->time_to_eat, philo->m_data);
 	pthread_mutex_unlock(&philo->m_data->eating_lock);
-    //smart_sleep(philo->m_data->time_to_eat * 1000, philo->m_data);
-    usleep(philo->m_data->time_to_eat * 1000);
+    //usleep(philo->m_data->time_to_eat * 1000);
 	print_status(philo, "finished eating");
 	philo->meal_counter++;
 	pthread_mutex_unlock(philo->right_fork);
@@ -38,8 +38,8 @@ void philo_eating(t_philo *philo)
 void philo_sleeping(t_philo *philo)
 {
 	print_status(philo, "is sleeping");
-    //smart_sleep(philo->m_data->time_to_sleep * 1000, philo->m_data);
-	usleep(philo->m_data->time_to_sleep * 1000);
+    smart_sleep(philo->m_data->time_to_sleep, philo->m_data);
+	//usleep(philo->m_data->time_to_sleep * 1000);
 }
 void philo_thinking(t_philo *philo)
 {

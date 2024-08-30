@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:13:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 15:55:33 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/30 18:59:08 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	get_actual_time(t_timer *timer)
 	timer->time_passed = (timer->current_time - timer->start_time);
 	return (timer->time_passed);
 }
-/* void smart_sleep(int time, t_metadata *m_data)
+void smart_sleep(int time, t_metadata *m_data)
 {
     int start_time;
     int current_time;
@@ -48,6 +48,6 @@ int	get_actual_time(t_timer *timer)
             break;
         }
         current_time = get_actual_time(m_data->time);
-        usleep(100); // Sleep for 100 microseconds
+        usleep(100);
     }
-} */
+}
