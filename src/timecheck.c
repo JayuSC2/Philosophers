@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:13:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 15:18:15 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/31 15:47:47 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,21 @@ int	get_current_time(void)
 	ms = (int)tv.tv_sec * 1000 + (int)tv.tv_usec / 1000;
     return (ms);
 }
-int	get_actual_time(t_timer *timer)
+int get_actual_time(t_timer *timer)
 {
-	timer->current_time = get_current_time();
-	if (timer->current_time == -1)
-		return (-1);
-	timer->time_passed = (timer->current_time - timer->start_time);
-	return (timer->time_passed);
+    int time_passed;
+
+    pthread_mutex_lock(&timer->time_lock);
+    timer->current_time = get_current_time();
+    if (timer->current_time == -1)
+    {
+        pthread_mutex_unlock(&timer->time_lock);
+        return (-1);
+    }
+    time_passed = timer->current_time - timer->start_time;
+    timer->time_passed = time_passed;
+    pthread_mutex_unlock(&timer->time_lock);
+    return (time_passed);
 }
 void smart_sleep(int time, t_metadata *m_data)
 {

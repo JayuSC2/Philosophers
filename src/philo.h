@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 14:44:31 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/31 15:48:13 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct	s_timer
 	int	start_time;
 	int	current_time;
 	int	time_passed;
+	pthread_mutex_t time_lock;
 }				t_timer;
 
 typedef struct	s_philo
@@ -52,7 +53,6 @@ typedef struct	s_metadata
 	bool death_flag;
 	bool all_full;
 	pthread_mutex_t all_full_lock;
-	pthread_mutex_t time_lock;
 	pthread_mutex_t *forks;
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t death_lock;

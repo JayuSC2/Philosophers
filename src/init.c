@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 15:00:52 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/31 15:48:33 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,17 @@ int print_init(t_metadata *m_data)
     }
     return (0);
 }
+
+int time_init(t_metadata *m_data)
+{
+	if (pthread_mutex_init(&m_data->time->time_lock, NULL) != 0)
+	{
+		destroy_mutex(m_data);
+		printf("Error initializing time mutex\n");
+		return (1);
+	}
+	return (0);
+}
 int all_full_init(t_metadata *m_data)
 {
 	if (pthread_mutex_init(&m_data->all_full_lock, NULL) != 0)
@@ -124,6 +135,8 @@ int mutex_init(t_metadata *m_data)
     if (print_init(m_data) == 1)
 		return (1);
 	if (death_flag_init(m_data) == 1)
+		return (1);
+	if (time_init(m_data) == 1)
 		return (1);
 /* 	if (all_full_init(m_data) == 1)
 		return (1); */
@@ -150,6 +163,11 @@ int destroy_mutex(t_metadata *m_data)
         return (1);
     }
 	if (pthread_mutex_destroy(&m_data->death_lock) != 0)
+	{
+		 printf("Error destroying eating_mutex\n");
+		 return (1);
+	}
+	if (pthread_mutex_destroy(&m_data->time->time_lock) != 0)
 	{
 		 printf("Error destroying eating_mutex\n");
 		 return (1);
