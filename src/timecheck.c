@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:13:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 18:59:08 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/31 14:45:36 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,13 @@ void smart_sleep(int time, t_metadata *m_data)
     current_time = start_time;
     while (current_time - start_time < time)
     {
+		pthread_mutex_lock(&m_data->death_lock);
         if (m_data->death_flag)
         {
+			pthread_mutex_unlock(&m_data->death_lock);
             break;
         }
+		pthread_mutex_unlock(&m_data->death_lock);
         current_time = get_actual_time(m_data->time);
         usleep(100);
     }
