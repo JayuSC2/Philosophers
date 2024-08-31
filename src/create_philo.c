@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_philo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 11:30:30 by julian           ###   ########.fr       */
+/*   Updated: 2024/08/31 17:41:46 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	create_philo(t_metadata *m_data)
         i++;
     }
 	//philo->time->start_time = get_current_time();
-	if (monitoring(m_data) == 1)
-		return (2);
+	/* if (monitoring(m_data) == 1)
+		return (2); */
+	monitoring(m_data);
     i = 0;
     while (i < m_data->philo_count)
     {
