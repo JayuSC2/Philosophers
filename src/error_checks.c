@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:17:06 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 15:00:06 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/31 15:34:02 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,16 @@ int	ft_isnumber(char *str)
 int	ft_check_args(int argc, char **argv)
 {
 	int i;
+	int j;
 	
 	i = 1;
+	j = 0;
 	if (argc != 5 && argc != 6)
 		 return (printf("Error: Invalid number of arguments\n"), 1);
-	//if (argv[5][0] == '0')
 	while(i < argc)
 	{
+		if (argv[i][0] == '\0')
+            return (printf("Error: Empty argument\n"), 1);
 		if (!ft_isnumber(argv[i]))
 			return (printf("Error: Non-numeric argument\n"), 1);
 		i++;
