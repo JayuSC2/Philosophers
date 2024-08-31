@@ -2,7 +2,7 @@ NAME = philo
 
 COMPILER = cc
 
-CFLAGS = -Wall -Wextra -Werror -pthread -g
+CFLAGS = -Wall -Wextra -Werror -pthread -fsanitize=thread -g
 
 SRCS =	src/main.c \
 		src/init.c \

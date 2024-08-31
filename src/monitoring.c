@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 17:40:15 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/31 18:40:43 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ int monitoring(t_metadata *m_data)
                 return (pthread_mutex_unlock(&m_data->death_lock), 1);
             }
 			pthread_mutex_unlock(&m_data->death_lock);
+			pthread_mutex_lock(&m_data->philo->meal_lock);
             if (m_data->philo[i].meal_counter == m_data->philo->m_data->num_of_meals && m_data->philo->m_data->num_of_meals != 0)
             {
+				pthread_mutex_unlock(&m_data->philo->meal_lock);
                 if (!m_data->philo[i].is_full)
                 {
                     m_data->philo[i].is_full = true;
@@ -51,7 +53,9 @@ int monitoring(t_metadata *m_data)
         }
         if (full_count == m_data->philo_count)
         {
+			pthread_mutex_lock(&m_data->full_lock);
             m_data->all_full = true;
+			pthread_mutex_unlock(&m_data->full_lock);
         }
         //usleep(1000);
     }

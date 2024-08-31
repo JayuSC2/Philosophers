@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 15:17:23 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/31 18:39:01 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void philo_eating(t_philo *philo)
     smart_sleep(philo->m_data->time_to_eat, philo->m_data);
     //usleep(philo->m_data->time_to_eat * 1000);
 	print_status(philo, "finished eating");
+	pthread_mutex_lock(&philo->meal_lock);
 	philo->meal_counter++;
+	pthread_mutex_unlock(&philo->meal_lock);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
 }
@@ -43,20 +45,6 @@ void philo_thinking(t_philo *philo)
 	print_status(philo, "is thinking");
 }
 
-/* void unlock_all_forks(t_philo *philo)
-{
-    if (philo->left_fork_locked)
-    {
-        pthread_mutex_unlock(philo->left_fork);
-        philo->left_fork_locked = 0;
-    }
-    if (philo->right_fork_locked)
-    {
-        pthread_mutex_unlock(philo->right_fork);
-        philo->right_fork_locked = 0;
-    }
-} */
-
 void *routine(void *arg)
 {
     t_philo *philo = (t_philo *)arg;
@@ -69,7 +57,9 @@ void *routine(void *arg)
         if (philo->m_data->death_flag == true || philo->m_data->all_full == true || philo->fatal == true)
             return (pthread_mutex_unlock(&philo->m_data->death_lock), arg);
 		pthread_mutex_unlock(&philo->m_data->death_lock);
+		pthread_mutex_lock(&philo->m_data->full_lock);
         if (philo->is_full == false)
+		pthread_mutex_unlock(&philo->m_data->full_lock);
         {
             philo_eating(philo);
             philo_sleeping(philo);

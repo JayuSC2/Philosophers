@@ -6,12 +6,11 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 16:19:02 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/31 18:37:56 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <pthread.h>
 
 int init_m_data(t_metadata *m_data, int argc, char **argv)
 {	
@@ -117,16 +116,28 @@ int time_init(t_metadata *m_data)
 	}
 	return (0);
 }
-int all_full_init(t_metadata *m_data)
+int full_init(t_metadata *m_data)
 {
-	if (pthread_mutex_init(&m_data->all_full_lock, NULL) != 0)
+	if (pthread_mutex_init(&m_data->full_lock, NULL) != 0)
 	{
 		destroy_mutex(m_data);
-		printf("Error initializing all_full mutex\n");
+		printf("Error initializing full mutex\n");
 		return (1);
 	}
 	return (0);
 }
+int meal_init(t_metadata *m_data)
+{
+	if (pthread_mutex_init(&m_data->philo->meal_lock, NULL) != 0)
+	{
+		destroy_mutex(m_data);
+		printf("Error initializing meal mutex\n");
+		return (1);
+	}
+	return (0);
+}
+
+
 
 int mutex_init(t_metadata *m_data)
 {
@@ -138,8 +149,10 @@ int mutex_init(t_metadata *m_data)
 		return (1);
 	if (time_init(m_data) == 1)
 		return (1);
-/* 	if (all_full_init(m_data) == 1)
-		return (1); */
+	if (full_init(m_data) == 1)
+		return (1);
+	if (meal_init(m_data) == 1)
+		return (1);
     return (0);
 }
 
@@ -164,23 +177,23 @@ int destroy_mutex(t_metadata *m_data)
     }
 	if (pthread_mutex_destroy(&m_data->death_lock) != 0)
 	{
-		 printf("Error destroying eating_mutex\n");
+		 printf("Error destroying death_mutex\n");
 		 return (1);
 	}
 	if (pthread_mutex_destroy(&m_data->time->time_lock) != 0)
 	{
-		 printf("Error destroying eating_mutex\n");
+		 printf("Error destroying time_mutex\n");
 		 return (1);
 	}
-/* 	if (pthread_mutex_destroy(&m_data->all_full_lock) != 0)
+	if (pthread_mutex_destroy(&m_data->full_lock) != 0)
 	{
-		 printf("Error destroying eating_mutex\n");
+		 printf("Error destroying full_mutex\n");
 		 return (1);
-	} */
-/* 	if (pthread_mutex_destroy(&m_data->time_lock) != 0)
+	}
+	if (pthread_mutex_destroy(&m_data->philo->meal_lock) != 0)
 	{
-		 printf("Error destroying eating_mutex\n");
+		 printf("Error destroying meal_mutex\n");
 		 return (1);
-	} */
+	}
 	return (0);
 }
