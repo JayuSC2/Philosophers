@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 18:34:05 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/31 12:59:26 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int monitoring(t_metadata *m_data)
         i = 0;
         while (i < m_data->philo_count)
         {
-			//pthread_mutex_lock(&m_data->time_lock);
+			pthread_mutex_lock(&m_data->time_lock);
             m_data->time->time_passed = get_actual_time(m_data->time);
+			pthread_mutex_unlock(&m_data->time_lock);
 			if (m_data->time->time_passed == -1)
 				return (1);
-			//pthread_mutex_unlock(&m_data->time_lock);
             if (m_data->time->time_passed - m_data->philo[i].last_meal > m_data->time_to_die)
             {
                 m_data->death_flag = true;

@@ -1,1 +1,4 @@
 tester/
+42-philosophers-tester/
+*.o
+philo

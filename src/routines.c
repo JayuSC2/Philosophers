@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 19:31:23 by juitz            ###   ########.fr       */
+/*   Updated: 2024/08/31 13:01:44 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void philo_eating(t_philo *philo)
 	philo->last_meal = get_actual_time(philo->m_data->time);
 	if (philo->last_meal == -1)
 		philo->fatal = true;
-    smart_sleep(philo->m_data->time_to_eat, philo->m_data);
 	pthread_mutex_unlock(&philo->m_data->eating_lock);
+    smart_sleep(philo->m_data->time_to_eat, philo->m_data);
     //usleep(philo->m_data->time_to_eat * 1000);
 	print_status(philo, "finished eating");
 	philo->meal_counter++;
@@ -65,7 +65,7 @@ void *routine(void *arg)
     t_philo *philo = (t_philo *)arg;
 
     if (philo->id % 2 == 0)
-        usleep(30);
+        usleep(150);
     while (1)
     {
         if (philo->m_data->death_flag == true || philo->m_data->all_full == true || philo->fatal == true)
