@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/01 16:33:51 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/01 17:01:57 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,19 @@ int forks_init(t_metadata *m_data)
     m_data->forks = malloc(sizeof(pthread_mutex_t) * m_data->philo_count);
     if (m_data->forks == NULL)
         return (ft_putendl_fd("Error allocating memory", 2), 1);
+
     i = 0;
     while (i < m_data->philo_count)
     {
         if (pthread_mutex_init(&m_data->forks[i], NULL) != 0)
         {
-        	destroy_mutex(m_data);
-			return (ft_putendl_fd("Error initializing mutex", 2), 1);
+            while (i > 0)
+            {
+                i--;
+                pthread_mutex_destroy(&m_data->forks[i]);
+            }
+            free(m_data->forks);
+            return (ft_putendl_fd("Error initializing mutex", 2), 1);
         }
         i++;
     }

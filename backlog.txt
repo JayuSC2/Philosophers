@@ -7,3 +7,4 @@
 - change fd to stderr
 - remove libft - done
 - need to check destroy logic
+- philo 2 zombie with: ./philo 3 200 150 60, mayhe datarace?

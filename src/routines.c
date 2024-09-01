@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/01 16:39:53 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/01 16:53:09 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ void *routine(void *arg)
         if (philo->m_data->death_flag == true || philo->m_data->all_full == true || philo->fatal == true)
             return (pthread_mutex_unlock(&philo->m_data->death_lock), arg);
 		pthread_mutex_unlock(&philo->m_data->death_lock);
-        if (philo->is_full == false)
+        if (philo->is_full == false && philo->m_data->death_flag == false)
         {
             philo_eating(philo);
             philo_sleeping(philo);
-			if (philo->m_data->death_flag == false)
-            	philo_thinking(philo);
+			//if (philo->m_data->death_flag == false)
+            philo_thinking(philo);
         }
     }
     return (arg);
