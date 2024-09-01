@@ -1,0 +1,37 @@
+0 3 has taken the left fork
+0 3 has taken the right fork
+0 3 is eating
+0 1 has taken the left fork
+0 1 has taken the right fork
+0 1 is eating
+200 1 finished eating
+200 1 is sleeping
+200 3 finished eating
+200 3 is sleeping
+200 2 has taken the left fork
+200 2 has taken the right fork
+200 2 is eating
+200 4 has taken the left fork
+200 4 has taken the right fork
+200 4 is eating
+300 3 is thinking
+300 1 is thinking
+311 1 died
+311 4 finished eating
+311 4 is sleeping
+311 4 is thinking
+311 1 has taken the left fork
+311 2 finished eating
+311 2 is sleeping
+311 2 is thinking
+311 3 has taken the left fork
+311 3 has taken the right fork
+311 3 is eating
+311 3 finished eating
+311 3 is sleeping
+311 3 is thinking
+311 1 has taken the right fork
+311 1 is eating
+311 1 finished eating
+311 1 is sleeping
+311 1 is thinking

@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 17:24:28 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/01 17:54:02 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		philo_eating(t_philo *philo);
 void		philo_sleeping(t_philo *philo);
 void		philo_thinking(t_philo *philo);
 void		*routine(void *routine);
+void		one_philo(t_philo *philo);
 
 //utils
 int			print_status(t_philo *philo, char *status);

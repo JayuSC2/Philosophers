@@ -7,7 +7,8 @@ CFLAGS = -Wall -Wextra -Werror -pthread -g
 SRCS =	src/main.c \
 		src/init.c \
 		src/create_philo.c \
-		src/utils.c \
+		src/utils_philo.c \
+		src/utils_general.c \
 		src/routines.c \
 		src/error_checks.c \
 		src/timecheck.c \
