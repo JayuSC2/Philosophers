@@ -3,8 +3,14 @@
 - fix odd number unwanted deaths - done
 - remove unnecessary prints (left fork, right fork)
 - don't forget to remove this before submitting lol
-- single philo case
+- single philo case -done
 - change fd to stderr
 - remove libft - done
 - need to check destroy logic
 - philo 2 zombie with: ./philo 3 200 150 60, mayhe datarace?
+- Testing uneven numbers - one should die
+	4 310 200 100 10
+- Testing even numbers - one should die
+	3 599 200 200 10
+	31 599 200 200 10
+	131 596 200 200 10

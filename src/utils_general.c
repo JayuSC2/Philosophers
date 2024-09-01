@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:19:47 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/01 17:51:38 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/01 19:32:39 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_atoi(const char *str)
 	}
 	return (num * sign);
 }
+
 long int	ft_atol(const char *str)
 {
 	int			i;
@@ -74,13 +75,13 @@ void	ft_bzero(void *s, size_t n)
 
 void	ft_putendl_fd(char *s, int fd)
 {
-    size_t	i;
+	size_t	i;
 
-    if (!s)
-        return ;
-    i = 0;
-    while (s[i] != '\0')
-        i++;
-    write(fd, s, i);
-    write(fd, "\n", 1);
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	write(fd, s, i);
+	write(fd, "\n", 1);
 }

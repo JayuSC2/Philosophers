@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:17:06 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/01 16:26:36 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/01 19:10:59 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_isdigit(int input)
 	else
 		return (0);
 }
+
 int	ft_isnumber(char *str)
 {
 	int	i;
@@ -53,17 +54,17 @@ int	ft_isnumber(char *str)
 
 int	ft_check_args(int argc, char **argv)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	i = 1;
 	j = 0;
 	if (argc != 5 && argc != 6)
-		 return (ft_putendl_fd("Error: Invalid number of arguments", 2), 1);
-	while(i < argc)
+		return (ft_putendl_fd("Error: Invalid number of arguments", 2), 1);
+	while (i < argc)
 	{
 		if (argv[i][0] == '\0')
-            return (ft_putendl_fd("Error: Empty argument", 2), 1);
+			return (ft_putendl_fd("Error: Empty argument", 2), 1);
 		if (!ft_isnumber(argv[i]))
 			return (ft_putendl_fd("Error: Non-numeric argument", 2), 1);
 		i++;
@@ -72,4 +73,3 @@ int	ft_check_args(int argc, char **argv)
 		return (ft_putendl_fd("Error: Argument overflow", 2), 1);
 	return (0);
 }
-
