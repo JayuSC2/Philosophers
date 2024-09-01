@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 15:17:23 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/01 16:39:53 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void *routine(void *arg)
         {
             philo_eating(philo);
             philo_sleeping(philo);
-            philo_thinking(philo);
+			if (philo->m_data->death_flag == false)
+            	philo_thinking(philo);
         }
     }
     return (arg);

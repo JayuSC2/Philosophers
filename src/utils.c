@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:19:47 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/30 16:22:29 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/01 16:25:33 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,17 @@ void	ft_bzero(void *s, size_t n)
 	ptr = s;
 	while (n-- > 0)
 		*ptr++ = 0;
+}
+
+void	ft_putendl_fd(char *s, int fd)
+{
+    size_t	i;
+
+    if (!s)
+        return ;
+    i = 0;
+    while (s[i] != '\0')
+        i++;
+    write(fd, s, i);
+    write(fd, "\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 18:17:06 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 15:34:02 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/01 16:26:36 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,17 @@ int	ft_check_args(int argc, char **argv)
 	i = 1;
 	j = 0;
 	if (argc != 5 && argc != 6)
-		 return (printf("Error: Invalid number of arguments\n"), 1);
+		 return (ft_putendl_fd("Error: Invalid number of arguments", 2), 1);
 	while(i < argc)
 	{
 		if (argv[i][0] == '\0')
-            return (printf("Error: Empty argument\n"), 1);
+            return (ft_putendl_fd("Error: Empty argument", 2), 1);
 		if (!ft_isnumber(argv[i]))
-			return (printf("Error: Non-numeric argument\n"), 1);
+			return (ft_putendl_fd("Error: Non-numeric argument", 2), 1);
 		i++;
 	}
 	if (check_overflow(argc, argv) == 1)
-		return (printf("Error: Argument overflow\n"), 1);
+		return (ft_putendl_fd("Error: Argument overflow", 2), 1);
 	return (0);
 }
 

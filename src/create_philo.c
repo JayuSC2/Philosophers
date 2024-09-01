@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 17:41:46 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/01 16:35:47 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ int	create_philo(t_metadata *m_data)
     while (i < m_data->philo_count)
     {
         if (pthread_create(&threads[i], NULL, &routine, &m_data->philo[i]) != 0)
-		{
-			printf("Error creating thread %d\n", i);
-            return(1);
-		}
+			return (ft_putendl_fd("Error creating thread",2), 1);
         i++;
     }
 	//philo->time->start_time = get_current_time();
@@ -35,10 +32,7 @@ int	create_philo(t_metadata *m_data)
     while (i < m_data->philo_count)
     {
         if (pthread_join(threads[i], NULL) != 0)
-        {
-            printf("Error joining thread %d\n", i);
-            return (1);
-        }
+            return (ft_putendl_fd("Error joining thread",2), 1);
         i++;
     }
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/31 17:40:15 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/01 16:37:12 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int monitoring(t_metadata *m_data)
         {
             m_data->time->time_passed = get_actual_time(m_data->time);
 			if (m_data->time->time_passed == -1)
-				return (1);
+				return (ft_putendl_fd("Error: gettimeofday failed!", 2), 1);
 			pthread_mutex_lock(&m_data->death_lock);
             if (m_data->time->time_passed - m_data->philo[i].last_meal > m_data->time_to_die)
             {
