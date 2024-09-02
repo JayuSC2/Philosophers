@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/01 19:09:27 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/02 14:10:28 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	create_philo(t_metadata *m_data)
 	while (i < m_data->philo_count)
 	{
 		if (pthread_join(threads[i], NULL) != 0)
-			return (ft_putendl_fd("Error joining thread", 2), 1);
+			ft_putendl_fd("Error joining thread", 2);
 		i++;
 	}
-	return (0);
+	return (free(threads), 0);
 }

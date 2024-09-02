@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/01 19:40:38 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/02 14:02:41 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void *routine(void *arg)
     {
 		pthread_mutex_lock(&philo->m_data->death_lock);
         if (philo->m_data->death_flag == true)
-            return (print_status(philo, "died"), pthread_mutex_unlock(&philo->m_data->death_lock), arg);
+            return (pthread_mutex_unlock(&philo->m_data->death_lock), arg);
 		pthread_mutex_unlock(&philo->m_data->death_lock);
 		if (philo->m_data->all_full == true || philo->fatal == true)
 			return (arg);
