@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 17:51:17 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/01 19:31:57 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/02 15:43:41 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	print_status(t_philo *philo, char *status)
 {
 	int	actual_time;
-
+	
+	if (philo->m_data->death_flag)
+		return (0);
 	pthread_mutex_lock(&philo->m_data->print_lock);
 	actual_time = get_actual_time(philo->m_data->time);
 	if (actual_time == -1)

@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/02 14:02:41 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/02 15:37:32 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void philo_eating(t_philo *philo)
 {
-	pthread_mutex_lock(philo->left_fork);
-	print_status(philo, "has taken the left fork");
 	pthread_mutex_lock(philo->right_fork);
 	print_status(philo, "has taken the right fork");
+	pthread_mutex_lock(philo->left_fork);
+	print_status(philo, "has taken the left fork");
     print_status(philo, "is eating");
 	pthread_mutex_lock(&philo->m_data->death_lock);
 	philo->last_meal = get_actual_time(philo->m_data->time);
@@ -27,9 +27,11 @@ void philo_eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->m_data->death_lock);
     smart_sleep(philo->m_data->time_to_eat, philo->m_data);
 	print_status(philo, "finished eating");
+	pthread_mutex_lock(&philo->m_data->meal_lock);
 	philo->meal_counter++;
-	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(&philo->m_data->meal_lock);
 	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 }
 void philo_sleeping(t_philo *philo)
 {

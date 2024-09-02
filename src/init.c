@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/01 19:17:17 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/02 15:36:58 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	mutex_init(t_metadata *m_data)
 		return (1);
 	if (pthread_mutex_init(&m_data->print_lock, NULL) != 0
 		|| pthread_mutex_init(&m_data->death_lock, NULL) != 0
+		|| pthread_mutex_init(&m_data->meal_lock, NULL) != 0
 		|| pthread_mutex_init(&m_data->time->time_lock, NULL) != 0)
 		return (ft_putendl_fd("Error initializing mutex", 2), 1);
 	return (0);
