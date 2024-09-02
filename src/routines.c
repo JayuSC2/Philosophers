@@ -6,12 +6,11 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/02 15:37:32 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/02 17:01:31 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <pthread.h>
 
 void philo_eating(t_philo *philo)
 {
