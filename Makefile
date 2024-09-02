@@ -1,8 +1,8 @@
 NAME = philo
 
-COMPILER = cc
+CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -pthread -g
+CFLAGS = -Wall -Wextra -Werror -pthread -g #-fsanitize=address
 
 SRCS =	src/main.c \
 		src/init.c \
@@ -21,7 +21,7 @@ RM = rm -rf
 
 all: $(NAME)
 $(NAME): $(OBJS)
-	@$(COMPILER) $(CFLAGS) -o $(NAME) $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "Program ready!"
 
 clean: 
