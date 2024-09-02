@@ -6,12 +6,11 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/02 15:37:32 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/02 16:16:12 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <pthread.h>
 
 void philo_eating(t_philo *philo)
 {
@@ -57,12 +56,16 @@ void *routine(void *arg)
         if (philo->m_data->death_flag == true)
             return (pthread_mutex_unlock(&philo->m_data->death_lock), arg);
 		pthread_mutex_unlock(&philo->m_data->death_lock);
+		pthread_mutex_lock(&philo->m_data->meal_lock);
 		if (philo->m_data->all_full == true || philo->fatal == true)
 			return (arg);
         if (philo->is_full == false)
+		pthread_mutex_unlock(&philo->m_data->meal_lock);
         {
             philo_eating(philo);
+			//pthread_mutex_lock(&philo->m_data->death_lock);
 			if (philo->m_data->death_flag == false)
+			//pthread_mutex_unlock(&philo->m_data->death_lock);
 			{
 				philo_sleeping(philo);
 				philo_thinking(philo);
