@@ -1,6 +1,6 @@
 NAME = philo
 
-COMPILER = cc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -pthread -g #-fsanitize=thread
 
@@ -29,10 +29,10 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	$(COMPILER) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@$(COMPILER) $(CFLAGS) -o $(NAME) $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "Program ready!"
 
 clean: 

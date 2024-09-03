@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 17:51:17 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/03 12:05:00 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 15:32:45 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	print_status(t_philo *philo, char *status)
 {
 	int	actual_time;
 	
-	pthread_mutex_lock(&philo->m_data->death_lock);
-	if (philo->m_data->death_flag)
-		return (pthread_mutex_unlock(&philo->m_data->death_lock), 0);
-	pthread_mutex_unlock(&philo->m_data->death_lock);
+	// pthread_mutex_lock(&philo->m_data->death_lock);
+	// if (philo->m_data->death_flag)
+	// 	return (pthread_mutex_unlock(&philo->m_data->death_lock), 0);
+	// pthread_mutex_unlock(&philo->m_data->death_lock);
 	pthread_mutex_lock(&philo->m_data->print_lock);
 	actual_time = get_current_time();
 	if (actual_time == -1)
@@ -29,6 +29,11 @@ int	print_status(t_philo *philo, char *status)
 		philo->fatal = true;
 		pthread_mutex_unlock(&philo->m_data->death_lock);
 	}
+	pthread_mutex_lock(&philo->m_data->death_lock);
+	if (philo->m_data->death_flag)
+		return (pthread_mutex_unlock(&philo->m_data->death_lock),
+			pthread_mutex_unlock(&philo->m_data->print_lock), 0);
+	pthread_mutex_unlock(&philo->m_data->death_lock);
 	printf("%d %d %s\n", actual_time - philo->m_data->start_time, philo->id, status);
 	pthread_mutex_unlock(&philo->m_data->print_lock);
 	return (0);

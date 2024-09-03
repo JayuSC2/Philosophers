@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/02 15:36:33 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 15:13:52 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,8 @@ int			ft_check_args(int argc, char **argv);
 
 int			monitoring(t_metadata *m_data);
 
-int			get_current_time(void);
-int			get_actual_time(t_timer *timer);
-void		smart_sleep(int time, t_metadata *m_data);
+size_t		get_current_time(void);
+void		smart_sleep(size_t time, t_metadata *m_data);
 
 int			init_m_data(t_metadata *m_data, int argc, char **argv);
 int			mutex_init(t_metadata *m_data);

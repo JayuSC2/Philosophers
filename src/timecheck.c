@@ -6,21 +6,21 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 17:13:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/02 15:52:14 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 15:16:08 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	get_current_time(void)
+size_t	get_current_time(void)
 {
 	struct timeval	tv;
-	int				ms;
+	size_t			ms;
 
 	ms = 0;
 	if (gettimeofday(&tv, NULL) != 0)
 		return (ft_putendl_fd("gettimeofday failed\n", 2), -1);
-	ms = (int)tv.tv_sec * 1000 + (int)tv.tv_usec / 1000;
+	ms = (int)tv.tv_sec * 1000 + (int)tv.tv_usec * 0.001;
 	return (ms);
 }
 
@@ -42,10 +42,10 @@ int	get_current_time(void)
 // 	return (time_passed);
 // }
 
-void	smart_sleep(int time, t_metadata *m_data)
+void	smart_sleep(size_t time, t_metadata *m_data)
 {
-	int	start_time;
-	int	current_time;
+	size_t	start_time;
+	size_t	current_time;
 
 	start_time = get_current_time();
 	current_time = start_time;

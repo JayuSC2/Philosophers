@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/03 12:04:39 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 16:10:21 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ int monitoring(t_metadata *m_data)
             pthread_mutex_unlock(&m_data->meal_lock);
             if (death_time > m_data->time_to_die)
             {
-                return (print_status(&m_data->philo[i], "died"), pthread_mutex_lock(&m_data->death_lock), m_data->death_flag = true, pthread_mutex_unlock(&m_data->death_lock), 1);
+                print_status(&m_data->philo[i], "died");
+				pthread_mutex_lock(&m_data->death_lock);
+				m_data->death_flag = true;
+				return (pthread_mutex_unlock(&m_data->death_lock), 1);
             }
 			pthread_mutex_lock(&m_data->meal_lock);
             if (m_data->philo[i].meal_counter >= m_data->num_of_meals && m_data->num_of_meals != 0)
@@ -56,7 +59,7 @@ int monitoring(t_metadata *m_data)
             pthread_mutex_unlock(&m_data->meal_lock);
             i++;
         }
-        if (full_count == m_data->philo_count)
+    	if (full_count == m_data->philo_count)
         {
             pthread_mutex_lock(&m_data->meal_lock);
             m_data->all_full = true;
