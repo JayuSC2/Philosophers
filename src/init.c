@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/03 13:56:58 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 16:55:17 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ int	init_m_data(t_metadata *m_data, int argc, char **argv)
 	m_data->time_to_die = ft_atoi(argv[2]);
 	m_data->time_to_eat = ft_atoi(argv[3]);
 	m_data->time_to_sleep = ft_atoi(argv[4]);
+	m_data->start_time = get_current_time();
+	if (m_data->start_time == -1)
+		return (1);
 	m_data->death_flag = false;
 	m_data->all_full = false;
 	if (argc == 6)
@@ -30,12 +33,6 @@ int	init_m_data(t_metadata *m_data, int argc, char **argv)
 	m_data->philo = (t_philo *)malloc(sizeof(t_philo) * m_data->philo_count);
 	if (m_data->philo == NULL)
 		return (ft_putendl_fd("Error: malloc for philo failed", 2), 1);
-	m_data->time = (t_timer *)malloc(sizeof(t_timer));
-	if (m_data->time == NULL)
-		return (1);
-	m_data->time->current_time = 0;
-	m_data->time->time_passed = 0;
-	m_data->time->start_time = get_current_time();
 	return (0);
 }
 
@@ -87,7 +84,7 @@ int	forks_init(t_metadata *m_data)
 	return (0);
 }
 
-int	mutex_init(t_metadata *m_data)
+int	init_mutex(t_metadata *m_data)
 {
 	if (pthread_mutex_init(&m_data->print_lock, NULL) != 0)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/03 15:13:52 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 16:55:51 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ size_t		get_current_time(void);
 void		smart_sleep(size_t time, t_metadata *m_data);
 
 int			init_m_data(t_metadata *m_data, int argc, char **argv);
-int			mutex_init(t_metadata *m_data);
+int			init_mutex(t_metadata *m_data);
 int			init_philos(t_metadata *m_data);
 int			destroy_mutex(t_metadata *m_data);
 void		free_all(t_metadata *m_data);

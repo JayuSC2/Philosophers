@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/03 15:04:53 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 16:49:31 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	create_philo(t_metadata *m_data)
 	if (threads == NULL)
 		return (ft_putendl_fd("Error allocating memory for threads", 2), 1);
 	m_data->start_time = get_current_time();
-	// m_data->start_time = -1;
 	if (m_data->start_time == -1)
 		return (free(threads), 1);
 	i = 0;

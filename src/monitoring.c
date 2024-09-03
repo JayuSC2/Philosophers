@@ -6,12 +6,11 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 12:36:27 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/03 16:10:21 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 16:46:18 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <bits/pthreadtypes.h>
 
 int monitoring(t_metadata *m_data)
 {
