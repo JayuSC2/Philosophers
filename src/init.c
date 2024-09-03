@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 17:45:14 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/03 16:55:17 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 17:25:19 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	init_philos(t_metadata *m_data)
 		m_data->philo[i].fatal = false;
 		m_data->philo[i].last_meal = get_current_time();
 		if (m_data->philo[i].last_meal == -1)
-			return (ft_putendl_fd("Error: gettimeofday failed!", 2), 1);
+			return (1);
 		m_data->philo[i].meal_counter = 0;
 		m_data->philo[i].m_data = m_data;
 		i++;
