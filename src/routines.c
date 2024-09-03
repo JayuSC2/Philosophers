@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:13:51 by juitz             #+#    #+#             */
-/*   Updated: 2024/09/03 17:38:16 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 18:29:40 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ void	philo_eating(t_philo *philo)
 		philo->fatal = true;
 		pthread_mutex_unlock(&philo->m_data->death_lock);
 	}
-	philo->meal_counter++;
 	pthread_mutex_unlock(&philo->m_data->meal_lock);
 	smart_sleep(philo->m_data->time_to_eat, philo->m_data);
+	pthread_mutex_lock(&philo->m_data->meal_lock);
+	philo->meal_counter++;
+	pthread_mutex_unlock(&philo->m_data->meal_lock);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 }
