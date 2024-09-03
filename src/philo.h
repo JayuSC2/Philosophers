@@ -6,7 +6,7 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:52 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 17:29:41 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/02 15:36:33 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,86 +20,54 @@
 # include <sys/time.h>
 # include <stdbool.h>
 
-#endif
-
-/* typedef struct	s_timer
+typedef struct s_timer
 {
-    int	start_time;
-    int	current_time;
-    int	time_passed;
+	int				start_time;
+	int				current_time;
+	int				time_passed;
+	pthread_mutex_t	time_lock;
 }				t_timer;
 
-typedef struct	s_metadata
+typedef struct s_philo
 {
-    int	philo_count;
-    int	time_to_die;
-    int time_to_eat;
-    int time_to_sleep;
-}				t_metadata;
-
-typedef struct	s_philo
-{
-    int id;
-    int last_meal;
-    bool death_flag;
-    pthread_mutex_t *fork;
-    t_timer	*time;
-    s_metadata *metadata;
-}			t_philo; */
-
-typedef struct	s_timer
-{
-	int	start_time;
-	int	current_time;
-	int	time_passed;
-}				t_timer;
-
-typedef struct	s_metadata
-{
-	int	philo_count;
-	int	time_to_die;
-	int time_to_eat;
-	int	time_to_sleep;
-	int	num_of_meals;
-	//pthread_mutex_t *forks;
-	pthread_mutex_t	print_lock;
-	//t_timer	*time;
-	//t_philo	*philo;
-}				t_metadata;
-
-typedef struct	s_philo
-{
-	int id;
-	//int	time_to_die;
-	int eat_count;
-	//int time_to_eat;
-	//int sleep_count;
-	//int	time_to_sleep;
-	//int	meals;
-	pthread_mutex_t *forks;
-	pthread_mutex_t *left_fork;
-	pthread_mutex_t *right_fork;
-	int last_meal;
-	int	meal_counter;
-	//int forks;
-	//int avail_forks;
-	bool death_flag;
-	bool is_full;
-	t_timer	*time;
-	t_metadata	*m_data;
+	struct s_metadata	*m_data;
+	int					id;
+	pthread_mutex_t		*left_fork;
+	pthread_mutex_t		*right_fork;
+	int					left_fork_locked;
+	int					right_fork_locked;
+	int					last_meal;
+	int					meal_counter;
+	bool				is_full;
+	bool				fatal;
 }			t_philo;
+typedef struct s_metadata
+{
+	int				philo_count;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				num_of_meals;
+	bool			death_flag;
+	bool			all_full;
+	pthread_mutex_t	all_full_lock;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print_lock;
+	pthread_mutex_t	death_lock;
+	pthread_mutex_t meal_lock;
+	int				start_time;
+	t_timer			*time;
+	t_philo			*philo;
+}				t_metadata;
 
-
-//philo
-int			create_philo(t_philo *philo);
-void		create_IDs(t_philo *philo);
-void		*philo_eating(void *eating);
-void		*philo_sleeping(void *sleeping);
-void		*philo_thinking(void *thinking);
+int			create_philo(t_metadata *m_data);
+void		philo_eating(t_philo *philo);
+void		philo_sleeping(t_philo *philo);
+void		philo_thinking(t_philo *philo);
 void		*routine(void *routine);
+void		one_philo(t_philo *philo);
 
-//utils
-void		print_status(t_philo *philo, char *status);
+int			print_status(t_philo *philo, char *status);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_bzero(void *s, size_t n);
 void		ft_error(char *str);
@@ -108,17 +76,18 @@ int			check_overflow(int argc, char **argv);
 int			isnumber(char *str);
 int			ft_atoi(const char *str);
 
-//error_checks
-int	ft_check_args(int argc, char **argv);
+int			ft_check_args(int argc, char **argv);
 
-//monitoring
-int	monitoring(t_philo *philo);
+int			monitoring(t_metadata *m_data);
 
-//timer
-int	get_current_time(void);
-int	get_actual_time(t_timer *timer);
+int			get_current_time(void);
+int			get_actual_time(t_timer *timer);
+void		smart_sleep(int time, t_metadata *m_data);
 
-//init
-int	init_variables(t_philo *philo, int argc, char **argv);
-int	mutex_init(t_philo *philo);
-int	destroy_mutex(t_philo *philo);
+int			init_m_data(t_metadata *m_data, int argc, char **argv);
+int			mutex_init(t_metadata *m_data);
+int			init_philos(t_metadata *m_data);
+int			destroy_mutex(t_metadata *m_data);
+void		free_all(t_metadata *m_data);
+
+#endif

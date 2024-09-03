@@ -6,43 +6,47 @@
 /*   By: juitz <juitz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:09:30 by juitz             #+#    #+#             */
-/*   Updated: 2024/08/24 17:45:14 by juitz            ###   ########.fr       */
+/*   Updated: 2024/09/03 13:16:35 by juitz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	create_philo(t_philo *philo)
+int	create_philo(t_metadata *m_data)
 {
-    pthread_t threads[philo->m_data->philo_count];
-    int i;
-    
-    i = 0;
-    while (i < philo->m_data->philo_count)
-    {
-        philo[i].id = i + 1;
-        philo[i].time = philo->time;
-		philo[i].last_meal = get_actual_time(philo->time);
-		philo[i].eat_count = 0;
-        if (pthread_create(&threads[i], NULL, &routine, &philo[i]) != 0)
-            return(1);
-        i++;
-    }
-	//philo->time->start_time = get_current_time();
-	monitoring(philo);
-	printf("test6\n");
-    i = 0;
-    while (i < philo->m_data->philo_count)
-    {
-        printf("Joining thread %d\n", i);
-        if (pthread_join(threads[i], NULL) != 0)
-        {
-            printf("Error joining thread %d\n", i);
-            return 1;
-        }
-        printf("Thread %d joined successfully\n", i);
-        i++;
-    }
-    printf("All threads joined\n");
-	return (0);
+	pthread_t	*threads;
+	int			i;
+
+	threads = (pthread_t *)malloc(m_data->philo_count * sizeof(pthread_t));
+	if (threads == NULL)
+		return (ft_putendl_fd("Error allocating memory for threads", 2), 1);
+	m_data->start_time = get_current_time();
+	//ERROR CHECK
+	i = 0;
+	while (i < m_data->philo_count)
+	{
+		if (pthread_create(&threads[i], NULL, &routine, &m_data->philo[i]) != 0)
+		{
+			pthread_mutex_lock(&m_data->death_lock);
+			m_data->death_flag = true;
+			pthread_mutex_unlock(&m_data->death_lock);
+			while (--i >= 0)
+			{
+				if (pthread_join(threads[i], NULL) != 0)
+					ft_putendl_fd("Error joining thread", 2);
+			}
+			free(threads);
+			return (ft_putendl_fd("Error creating thread", 2), 1);
+		}
+		i++;
+	}
+	monitoring(m_data);
+	i = 0;
+	while (i < m_data->philo_count)
+	{
+		if (pthread_join(threads[i], NULL) != 0)
+			ft_putendl_fd("Error joining thread", 2);
+		i++;
+	}
+	return (free(threads), 0);
 }
